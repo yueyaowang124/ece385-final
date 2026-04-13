@@ -1,0 +1,26 @@
+# Vivado 产生的临时文件和编译缓存
+*.jou
+*.log
+*.str
+*.zip
+*.dmp
+.Xil/
+*_webtalk.html
+*_webtalk.xml
+webtalk.jou
+webtalk.log
+
+# 忽略 Vivado 工程目录下的庞大编译文件夹
+*.cache/
+*.hw/
+*.ip_user_files/
+*.runs/
+*.sim/
+
+# Vitis/SDK 软件相关的庞大中间文件（只保留C/H源码即可）
+.metadata/
+.analytics/
+RemoteSystemsTempFiles/
+*.elf
+*.bit
+*.mmi
