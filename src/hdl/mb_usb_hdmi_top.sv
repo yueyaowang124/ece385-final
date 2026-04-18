@@ -35,10 +35,9 @@ module mb_usb_hdmi_top(
     output logic [2:0]hdmi_tmds_data_p,
 */
 
-    //I2S
-    output logic audio_bit_clk,
-    output logic audio_lr_clk,
-    output logic audio_sdata,
+    //PDM  
+    output logic spkl,
+    output logic spkr,
 
     //HEX displays
     output logic [7:0] hex_segA,
@@ -196,27 +195,29 @@ module mb_usb_hdmi_top(
         .phase_increment (keycode_from_cpu),
         .audio_out       (dds_to_i2s_wire)
     );
-
-    i2s_controller i2s_inst (
-        .clk             (Clk),
-        .reset           (reset_ah),
-        .data_in         (dds_to_i2s_wire),
-        .sdata           (audio_sdata),
-        .bclk            (audio_bit_clk),
-        .lrclk           (audio_lr_clk)
-    );
+    
+    audio_pdm pdm_inst ( 
+        .clk            (Clk), 
+        .reset_n        (~reset_ah), 
+        .audio_in       (dds_to_pdm_wire), 
+        .pdm_out        (spkl) 
+    ); 
+    assign spkr = spkl;
+   
+    
 
     hex_driver HexA (
         .clk(Clk),
         .reset(reset_ah),
-        .in({keycode_from_cpu[31:16]}),
+        .in({keycode_from_cpu[31:28], keycode_from_cpu[27:24], keycode_from_cpu[23:20], keycode_from_cpu[19:16]}), 
         .hex_seg(hex_segA),
         .hex_grid(hex_gridA)
     );
     hex_driver HexB (
         .clk(Clk),
         .reset(reset_ah),
-        .in({keycode_from_cpu[15:0]}),
+        .in({keycode_from_cpu[15:12], 
+        keycode_from_cpu[11:8], keycode_from_cpu[7:4], keycode_from_cpu[3:0]}), 
         .hex_seg(hex_segB),
         .hex_grid(hex_gridB)
     );
