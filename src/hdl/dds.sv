@@ -1,44 +1,38 @@
-module dds_oscillator 
-(
+//=============================================================================
+// dds.sv  -  Direct Digital Synthesizer (Week 1: square wave only)
+//
+// Phase accumulator + simple square-wave output.
+// To upgrade to sine/saw later, replace the always_comb with a LUT lookup.
+//
+// phase_increment = f_target * 2^32 / f_clk
+// At 100MHz: 440 Hz -> 18897, 261.6 Hz -> 11236
+//=============================================================================
+module dds_oscillator (
     input  logic        clk,
-    input  logic        reset_n, //low-level reset
-    input  logic [31:0] phase_increment,//from AXI, the step size
-    output logic [15:0] audio_out
+    input  logic        reset_n,            // synchronous, active-low
+    input  logic [31:0] phase_increment,    // from AXI register
+    output logic [15:0] audio_out           // signed 16-bit
 );
 
-    logic [31:0] phase;//the current phase
-    logic reset = ~reset_n;
+    logic [31:0] phase;
 
-    always_ff @(posedge clk or negedge reset_n)
-    begin
-        if (!reset_n) 
-        begin
+    // synchronous reset (matches AXI s00_axi_aresetn)
+    always_ff @(posedge clk) begin
+        if (!reset_n)
             phase <= 32'd0;
-        end 
-
-        else 
-        begin
+        else
             phase <= phase + phase_increment;
-        end
     end
 
-    always_comb 
-    begin
-        if (phase_increment == 32'd0) //nothing being pressed
-        begin
-            audio_out = 16'h0000;
-        end 
-        else 
-        begin
-            if (phase[31] == 1'b1) 
-            begin
-                audio_out = 16'h7FFF;//the max output a 16bit signed number can represents
-            end
-            else 
-            begin
-                audio_out = 16'h8000;//the min output a 16 bit signed number can represent
-            end
-        end
+    // square wave: top bit of phase decides +max or -max
+    // when phase_increment == 0, output mid-scale (silence)
+    always_comb begin
+        if (phase_increment == 32'd0)
+            audio_out = 16'h0000;        // signed zero -> PDM mid -> silence
+        else if (phase[31])
+            audio_out = 16'h7FFF;        // +max
+        else
+            audio_out = 16'h8000;        // -max  (signed -32768)
     end
 
 endmodule
