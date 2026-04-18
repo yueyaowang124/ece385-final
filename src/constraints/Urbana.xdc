@@ -1,16 +1,19 @@
+
 set_property -dict {PACKAGE_PIN N15 IOSTANDARD LVCMOS33} [get_ports {Clk}]
+
 
 set_property -dict {PACKAGE_PIN J2 IOSTANDARD LVCMOS25} [get_ports {reset_rtl_0}]
 
-set_property -dict {PACKAGE_PIN B16 IOSTANDARD LVCMOS33} [get_ports {gpio_usb_int_tri_i[0]}]
-set_property -dict {PACKAGE_PIN G17 IOSTANDARD LVCMOS33} [get_ports {gpio_usb_rst_tri_o}]
-set_property -dict {PACKAGE_PIN K17 IOSTANDARD LVCMOS33} [get_ports {usb_spi_miso}]
-set_property -dict {PACKAGE_PIN K18 IOSTANDARD LVCMOS33} [get_ports {usb_spi_mosi}]
-set_property -dict {PACKAGE_PIN L17 IOSTANDARD LVCMOS33} [get_ports {usb_spi_sclk}]
-set_property -dict {PACKAGE_PIN M17 IOSTANDARD LVCMOS33} [get_ports {usb_spi_ss}]
+set_property -dict {PACKAGE_PIN B16 IOSTANDARD LVCMOS33} [get_ports {uart_rtl_0_txd}]
+set_property -dict {PACKAGE_PIN A16 IOSTANDARD LVCMOS33} [get_ports {uart_rtl_0_rxd}]
 
-set_property -dict {PACKAGE_PIN B12 IOSTANDARD LVCMOS33} [get_ports {uart_rtl_0_rxd}]
-set_property -dict {PACKAGE_PIN A12 IOSTANDARD LVCMOS33} [get_ports {uart_rtl_0_txd}]
+
+set_property -dict {PACKAGE_PIN U12 IOSTANDARD LVCMOS33} [get_ports {usb_spi_miso}]
+set_property -dict {PACKAGE_PIN V15 IOSTANDARD LVCMOS33} [get_ports {usb_spi_mosi}]
+set_property -dict {PACKAGE_PIN V14 IOSTANDARD LVCMOS33} [get_ports {usb_spi_sclk}]
+set_property -dict {PACKAGE_PIN T12 IOSTANDARD LVCMOS33} [get_ports {usb_spi_ss}]
+set_property -dict {PACKAGE_PIN V13 IOSTANDARD LVCMOS33} [get_ports {gpio_usb_rst_tri_o}]
+set_property -dict {PACKAGE_PIN T13 IOSTANDARD LVCMOS33} [get_ports {gpio_usb_int_tri_i}]
 
 set_property -dict {PACKAGE_PIN B13 IOSTANDARD LVCMOS33} [get_ports {spkl}]
 set_property -dict {PACKAGE_PIN B14 IOSTANDARD LVCMOS33} [get_ports {spkr}]
@@ -40,3 +43,7 @@ set_property -dict {PACKAGE_PIN F4 IOSTANDARD LVCMOS25} [get_ports {hex_segB[4]}
 set_property -dict {PACKAGE_PIN H3 IOSTANDARD LVCMOS25} [get_ports {hex_segB[5]}]
 set_property -dict {PACKAGE_PIN E5 IOSTANDARD LVCMOS25} [get_ports {hex_segB[6]}]
 set_property -dict {PACKAGE_PIN J4 IOSTANDARD LVCMOS25} [get_ports {hex_segB[7]}]
+
+set_property CFGBVS VCCO [current_design]
+set_property CONFIG_VOLTAGE 3.3 [current_design]
+set_property BITSTREAM.Config.SPI_buswidth 4 [current_design]
