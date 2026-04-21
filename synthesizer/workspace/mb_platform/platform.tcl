@@ -45,3 +45,9 @@ platform generate -domains
 platform config -updatehw {D:/ece385/final/ece385-final/synthesizer/mb_block_wrapper.xsa}
 platform config -updatehw {D:/ece385/final/ece385-final/synthesizer/mb_block_wrapper.xsa}
 platform config -updatehw {D:/ece385/final/ece385-final/synthesizer/mb_block_wrapper.xsa}
+platform active {mb_platform}
+platform config -updatehw {D:/ece385/final/ece385-final/synthesizer/mb_block_wrapper.xsa}
+platform generate -domains 
+platform config -updatehw {D:/ece385/final/ece385-final/synthesizer/mb_block_wrapper.xsa}
+platform clean
+platform generate

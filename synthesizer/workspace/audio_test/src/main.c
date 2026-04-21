@@ -1,95 +1,101 @@
 //=============================================================================
-// main_piano.c  -  Week 1 Day 1：16 拨码开关当 16 个琴键
+// main_piano_usb.c  -  Week 2 Day 3：USB 键盘弹钢琴（复音）
 //
-// 功能：
-//   - 轮询 AXI_GPIO 上的 SW[0:15]
-//   - 拨起任意一个 switch，通过 DDS 播出对应的音高
-//   - 多个开关同时拨 → 播最低位那个（Day 2 换成硬件 mixer 做和弦）
-//   - 全部拨下 → 静音
+// 数据流：
+//   USB 键盘 → MAX3421E → SPI → MicroBlaze → kbdPoll() 解析 BOOT_KBD_REPORT
+//   → 查表 keycode_to_phase_inc → 写 DDS 4 个声道 phase_inc 寄存器
+//   → dds_mixer 求和 → audio_pdm → 3.5mm 耳机
 //
-// 硬件映射（16 键覆盖 C4..D6，两个八度 C 大调）：
-//   SW[0]=C4   SW[1]=D4   SW[2]=E4   SW[3]=F4
-//   SW[4]=G4   SW[5]=A4   SW[6]=B4   SW[7]=C5
-//   SW[8]=D5   SW[9]=E5   SW[10]=F5  SW[11]=G5
-//   SW[12]=A5  SW[13]=B5  SW[14]=C6  SW[15]=D6
+// 键位（USB HID Usage Codes）：
+//   Lower octave (bottom row):
+//     A(0x04)=C4  S(0x16)=D4  D(0x07)=E4  F(0x09)=F4
+//     G(0x0A)=G4  H(0x0B)=A4  J(0x0D)=B4  K(0x0E)=C5
 //
-// 寄存器：
-//   DDS  0x44A00000:  +0x00 phase_inc,  +0x08 enable
-//   GPIO 0x40000000:  +0x00 GPIO_DATA (读 SW[15:0])
-//   ↑ GPIO 地址以 Address Editor 实际分配为准，下面 GPIO_BASE 可能要改
+//   Upper octave (top row):
+//     Q(0x14)=D5  W(0x1A)=E5  E(0x08)=F5  R(0x15)=G5
+//     T(0x17)=A5  Y(0x1C)=B5  U(0x18)=C6  I(0x0C)=D6
+//
+//   USB boot keyboard 协议一次最多报 6 个同时按下的键；
+//   我们取前 4 个分到 4 个 DDS 声道（跟之前 switch 版本一致）。
 //=============================================================================
 #include "xparameters.h"
 #include "xil_io.h"
+#include "xil_printf.h"
+#include "project_config.h"    // 包含 MAX3421E/HID/transfer 等所有 USB 头
 
 //------------------------------------------------------
 // 硬件基地址
 //------------------------------------------------------
-// DDS 用硬编码（你之前 xparameters 宏名字总是变）
 #define DDS_BASE        0x44A00000
-#define REG_PHASE_INC   0x00
-#define REG_ENABLE      0x08
-
-// AXI GPIO：优先用 xparameters 宏，如果宏名不同把下面的 fallback 也改掉
-#ifdef XPAR_AXI_GPIO_0_BASEADDR
-  #define GPIO_BASE  XPAR_AXI_GPIO_0_BASEADDR
-#elif defined(XPAR_GPIO_0_BASEADDR)
-  #define GPIO_BASE  XPAR_GPIO_0_BASEADDR
-#else
-  // 如果编译时宏没找到，手动填 Address Editor 里看到的那个值
-  #define GPIO_BASE  0x40000000
-#endif
-#define REG_GPIO_DATA   0x00
+#define REG_PHASE_0     0x00
+#define REG_PHASE_1     0x04
+#define REG_PHASE_2     0x08
+#define REG_PHASE_3     0x0C
+#define REG_ENABLE      0x10
 
 //------------------------------------------------------
-// phase_inc 查表：inc = f * 2^32 / 100_000_000
+// keycode → phase_inc 查表（USB HID code 0x00..0xFF）
+// 其他键默认 0 = 静音
 //------------------------------------------------------
-#define INC_SILENCE  0
-static const unsigned int PHASE_INC_TABLE[16] = {
-    11236,  // SW[0]  C4   261.6 Hz
-    12607,  // SW[1]  D4   293.7 Hz
-    14157,  // SW[2]  E4   329.6 Hz
-    14999,  // SW[3]  F4   349.2 Hz
-    16838,  // SW[4]  G4   392.0 Hz
-    18897,  // SW[5]  A4   440.0 Hz
-    21213,  // SW[6]  B4   493.9 Hz
-    22473,  // SW[7]  C5   523.3 Hz
-    25215,  // SW[8]  D5   587.3 Hz
-    28314,  // SW[9]  E5   659.3 Hz
-    29998,  // SW[10] F5   698.5 Hz
-    33676,  // SW[11] G5   784.0 Hz
-    37795,  // SW[12] A5   880.0 Hz
-    42426,  // SW[13] B5   987.8 Hz
-    44947,  // SW[14] C6  1046.5 Hz
-    50430   // SW[15] D6  1174.7 Hz
+static const unsigned int KEYCODE_TO_PHASE_INC[256] = {
+    // ===== Lower octave: A S D F G H J K =====
+    [0x04] = 11236,  // A → C4  (261.6 Hz)
+    [0x16] = 12607,  // S → D4  (293.7 Hz)
+    [0x07] = 14157,  // D → E4  (329.6 Hz)
+    [0x09] = 14999,  // F → F4  (349.2 Hz)
+    [0x0A] = 16838,  // G → G4  (392.0 Hz)
+    [0x0B] = 18897,  // H → A4  (440.0 Hz)
+    [0x0D] = 21213,  // J → B4  (493.9 Hz)
+    [0x0E] = 22473,  // K → C5  (523.3 Hz)
+
+    // ===== Upper octave: Q W E R T Y U I =====
+    [0x14] = 25215,  // Q → D5  (587.3 Hz)
+    [0x1A] = 28314,  // W → E5  (659.3 Hz)
+    [0x08] = 29998,  // E → F5  (698.5 Hz)
+    [0x15] = 33676,  // R → G5  (784.0 Hz)
+    [0x17] = 37795,  // T → A5  (880.0 Hz)
+    [0x1C] = 42426,  // Y → B5  (987.8 Hz)
+    [0x18] = 44947,  // U → C6  (1046.5 Hz)
+    [0x0C] = 50430,  // I → D6  (1174.7 Hz)
 };
 
 //------------------------------------------------------
-// 小工具
+// DDS helpers
 //------------------------------------------------------
-static inline unsigned int read_switches(void) {
-    // AXI GPIO DATA 寄存器：低 16 bit 就是 SW[15:0]
-    return Xil_In32(GPIO_BASE + REG_GPIO_DATA) & 0xFFFF;
+static inline void set_voice(int v, unsigned int inc) {
+    Xil_Out32(DDS_BASE + (v * 4), inc);
+}
+static inline void set_enable(unsigned int en) {
+    Xil_Out32(DDS_BASE + REG_ENABLE, en);
 }
 
-static inline void set_dds(unsigned int inc) {
-    Xil_Out32(DDS_BASE + REG_PHASE_INC, inc);
+static void silence_all(void) {
+    set_voice(0, 0);
+    set_voice(1, 0);
+    set_voice(2, 0);
+    set_voice(3, 0);
 }
 
-// 找最低置位的 switch index；全 0 返回 -1
-static int lowest_set_bit(unsigned int v) {
-    if (v == 0) return -1;
-    int i;
-    for (i = 0; i < 16; i++) {
-        if (v & (1u << i)) return i;
-    }
-    return -1;
-}
-
-// 忙等延迟：~50ns / loop @ 100 MHz
-static void delay_us(int us) {
+static void delay_ms(int ms) {
     volatile int i;
-    for (i = 0; i < us * 20; i++) {
-        asm volatile ("nop");
+    for (i = 0; i < ms * 20000; i++) asm volatile ("nop");
+}
+
+//------------------------------------------------------
+// 把 HID report 映射到 4 个声道
+//   boot keyboard report: report.keycode[6]
+//   同时按下的最多 4 个音映射到 voice 0..3
+//------------------------------------------------------
+static void dispatch_keys(const BOOT_KBD_REPORT* rep, unsigned int voices[4]) {
+    int vcount = 0;
+    voices[0] = voices[1] = voices[2] = voices[3] = 0;
+
+    for (int i = 0; i < 6 && vcount < 4; i++) {
+        BYTE kc = rep->keycode[i];
+        if (kc == 0) continue;                    // 空槽位
+        unsigned int inc = KEYCODE_TO_PHASE_INC[kc];
+        if (inc == 0) continue;                   // 不在我们映射表里的键（比如 modifier）
+        voices[vcount++] = inc;
     }
 }
 
@@ -97,31 +103,56 @@ static void delay_us(int us) {
 // main
 //------------------------------------------------------
 int main(void) {
-    // 上电先使能 DDS 但不发声
-    Xil_Out32(DDS_BASE + REG_ENABLE, 1);
-    set_dds(INC_SILENCE);
+    xil_printf("\r\n=== USB Piano boot ===\r\n");
 
-    // 上电"欢迎音"：A4 响 300ms，证明板子活着
-    set_dds(18897);
-    delay_us(300000);
-    set_dds(INC_SILENCE);
+    // 先把 DDS 关掉静音，免得初始化期间乱响
+    silence_all();
+    set_enable(1);
 
-    unsigned int last_inc = INC_SILENCE;
+    // 上电欢迎音：A4 响 200ms，证明 DDS 链路活着
+    set_voice(0, 18897);   // A4
+    delay_ms(200);
+    set_voice(0, 0);
+
+    // USB stack 初始化
+    HID_init();
+    USB_init();
+    MAX3421E_init();       // 这里面有 printf"Initializing SPI"，能看到就说明 SPI init OK
+    xil_printf("USB init done, waiting for keyboard...\r\n");
+
+    BOOT_KBD_REPORT kbd;
+    unsigned int last_voices[4] = {0};
 
     while (1) {
-        unsigned int sw = read_switches();
-        int key = lowest_set_bit(sw);
+        // USB 状态机：driver 扫 MAX3421E 中断 + 推进 enumeration
+        MAX3421E_Task();
+        USB_Task();
 
-        unsigned int inc = (key < 0) ? INC_SILENCE : PHASE_INC_TABLE[key];
+        // 只有当 USB 成功枚举键盘之后才轮询键码
+        if (GetUsbTaskState() == USB_STATE_RUNNING) {
+            BYTE rc = kbdPoll(&kbd);
 
-        // 只在音高变化时写寄存器，避免 click 噪声
-        if (inc != last_inc) {
-            set_dds(inc);
-            last_inc = inc;
+            if (rc == 0) {  // 0 = success，报告结构体里是当前按下的键
+                unsigned int v[4];
+                dispatch_keys(&kbd, v);
+
+                // 只在有变化时写 DDS，避免 click 和不必要的 AXI 流量
+                for (int i = 0; i < 4; i++) {
+                    if (v[i] != last_voices[i]) {
+                        set_voice(i, v[i]);
+                        last_voices[i] = v[i];
+                    }
+                }
+            }
+            // rc != 0 通常是 NAK（键盘没按任何键），保持当前 DDS 状态不变
+        } else {
+            // 键盘未连上或未枚举完成 → 静音
+            if (last_voices[0] | last_voices[1] | last_voices[2] | last_voices[3]) {
+                silence_all();
+                last_voices[0] = last_voices[1] = last_voices[2] = last_voices[3] = 0;
+            }
         }
-
-        // ~1 ms 轮询间隔，绰绰有余
-        delay_us(1000);
     }
+
     return 0;
 }

@@ -10,7 +10,7 @@
 # source D:\ece385\final\ece385-final\synthesizer\workspace\audio_test_system\_ide\scripts\debugger_audio_test-default.tcl
 # 
 connect -url tcp:127.0.0.1:3121
-targets -set -filter {jtag_cable_name =~ "RealDigital Boo 887100000000A" && level==0 && jtag_device_ctx=="jsn1-0362f093-0"}
+targets -set -filter {jtag_cable_name =~ "RealDigital Boo 8874042400A4A" && level==0 && jtag_device_ctx=="jsn4-0362f093-0"}
 fpga -file D:/ece385/final/ece385-final/synthesizer/workspace/audio_test/_ide/bitstream/mb_block_wrapper.bit
 targets -set -nocase -filter {name =~ "*microblaze*#0" && bscan=="USER2" }
 loadhw -hw D:/ece385/final/ece385-final/synthesizer/workspace/mb_platform/export/mb_platform/hw/mb_block_wrapper.xsa -regs
