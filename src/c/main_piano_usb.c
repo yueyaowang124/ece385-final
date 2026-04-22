@@ -32,6 +32,14 @@
 #define REG_PHASE_2     0x08
 #define REG_PHASE_3     0x0C
 #define REG_ENABLE      0x10
+#define REG_WAVE_SEL    0x14 //added for wave selection
+
+#define SW_GPIO_BASE    0x40010000
+static const char* WAVE_NAMES[8] = {
+    "Square",   "Triangle", "Sawtooth", "Sine",
+    "Organ",    "Vibrato",  "---",      "---"
+};
+
 
 //------------------------------------------------------
 // keycode → phase_inc 查表（USB HID code 0x00..0xFF）
@@ -81,6 +89,11 @@ static void delay_ms(int ms) {
     for (i = 0; i < ms * 20000; i++) asm volatile ("nop");
 }
 
+//sw0-sw2 are intended for wave sele
+static unsigned int read_wave_sel(void) {
+    return Xil_In32(SW_GPIO_BASE) & 0x7;
+}
+
 //------------------------------------------------------
 // 把 HID report 映射到 4 个声道
 //   boot keyboard report: report.keycode[6]
@@ -103,40 +116,57 @@ static void dispatch_keys(const BOOT_KBD_REPORT* rep, unsigned int voices[4]) {
 // main
 //------------------------------------------------------
 int main(void) {
-    xil_printf("\r\n=== USB Piano boot ===\r\n");
-
-    // 先把 DDS 关掉静音，免得初始化期间乱响
+    xil_printf("\r\n=== USB Piano boot (6-waveform edition) ===\r\n");
+    xil_printf("SW[2:0]: 000=Square 001=Triangle 010=Sawtooth\r\n");
+    xil_printf("         011=Sine   100=Organ    101=Vibrato\r\n\r\n");
+ 
+    // 静音，等待初始化完成
     silence_all();
     set_enable(1);
-
-    // 上电欢迎音：A4 响 200ms，证明 DDS 链路活着
+ 
+    // 读当前 SW 设置并写入 wave_sel
+    unsigned int cur_wave = read_wave_sel();
+    set_wave_sel(cur_wave);
+    xil_printf("Initial waveform: %s (SW=%d)\r\n", WAVE_NAMES[cur_wave], cur_wave);
+ 
+    // 上电欢迎音：A4 响 300ms，证明 DDS 链路正常
     set_voice(0, 18897);   // A4
-    delay_ms(200);
+    delay_ms(300);
     set_voice(0, 0);
-
-    // USB stack 初始化
+    delay_ms(100);
+ 
+    // USB 栈初始化
     HID_init();
     USB_init();
-    MAX3421E_init();       // 这里面有 printf"Initializing SPI"，能看到就说明 SPI init OK
+    MAX3421E_init();
     xil_printf("USB init done, waiting for keyboard...\r\n");
-
+ 
     BOOT_KBD_REPORT kbd;
     unsigned int last_voices[4] = {0};
-
+    unsigned int last_wave = cur_wave;
+ 
     while (1) {
-        // USB 状态机：driver 扫 MAX3421E 中断 + 推进 enumeration
+        // ---------- 波形切换检测 ----------
+        unsigned int new_wave = read_wave_sel();
+        if (new_wave != last_wave) {
+            set_wave_sel(new_wave);
+            last_wave = new_wave;
+            xil_printf("Waveform → %s (SW=%d)\r\n",
+                       WAVE_NAMES[new_wave], new_wave);
+        }
+ 
+        // ---------- USB 状态机 ----------
         MAX3421E_Task();
         USB_Task();
-
-        // 只有当 USB 成功枚举键盘之后才轮询键码
+ 
         if (GetUsbTaskState() == USB_STATE_RUNNING) {
             BYTE rc = kbdPoll(&kbd);
-
-            if (rc == 0) {  // 0 = success，报告结构体里是当前按下的键
+ 
+            if (rc == 0) {
                 unsigned int v[4];
                 dispatch_keys(&kbd, v);
-
-                // 只在有变化时写 DDS，避免 click 和不必要的 AXI 流量
+ 
+                // 只在变化时写 DDS，减少 AXI 流量
                 for (int i = 0; i < 4; i++) {
                     if (v[i] != last_voices[i]) {
                         set_voice(i, v[i]);
@@ -144,15 +174,17 @@ int main(void) {
                     }
                 }
             }
-            // rc != 0 通常是 NAK（键盘没按任何键），保持当前 DDS 状态不变
+            // rc != 0 → NAK，键盘没按键，保持当前状态
         } else {
-            // 键盘未连上或未枚举完成 → 静音
-            if (last_voices[0] | last_voices[1] | last_voices[2] | last_voices[3]) {
+            // 键盘未连接 → 静音
+            if (last_voices[0] | last_voices[1] |
+                last_voices[2] | last_voices[3]) {
                 silence_all();
-                last_voices[0] = last_voices[1] = last_voices[2] = last_voices[3] = 0;
+                last_voices[0] = last_voices[1] =
+                last_voices[2] = last_voices[3] = 0;
             }
         }
     }
-
+ 
     return 0;
 }
