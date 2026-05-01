@@ -599,11 +599,11 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>GENtimestamp</spirit:name>
-            <spirit:value>Tue Apr 21 04:15:53 UTC 2026</spirit:value>
+            <spirit:value>Fri Apr 24 04:18:39 UTC 2026</spirit:value>
           </spirit:parameter>
           <spirit:parameter>
             <spirit:name>outputProductCRC</spirit:name>
-            <spirit:value>9:43754734</spirit:value>
+            <spirit:value>9:0da428cb</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -614,7 +614,7 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>outputProductCRC</spirit:name>
-            <spirit:value>9:43754734</spirit:value>
+            <spirit:value>9:0da428cb</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -630,11 +630,11 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>GENtimestamp</spirit:name>
-            <spirit:value>Tue Apr 21 04:15:53 UTC 2026</spirit:value>
+            <spirit:value>Fri Apr 24 04:18:39 UTC 2026</spirit:value>
           </spirit:parameter>
           <spirit:parameter>
             <spirit:name>outputProductCRC</spirit:name>
-            <spirit:value>9:43754734</spirit:value>
+            <spirit:value>9:0da428cb</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -650,11 +650,11 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>GENtimestamp</spirit:name>
-            <spirit:value>Tue Apr 21 04:15:53 UTC 2026</spirit:value>
+            <spirit:value>Fri Apr 24 04:18:39 UTC 2026</spirit:value>
           </spirit:parameter>
           <spirit:parameter>
             <spirit:name>outputProductCRC</spirit:name>
-            <spirit:value>9:0032038b</spirit:value>
+            <spirit:value>9:5639c192</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -670,11 +670,11 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>GENtimestamp</spirit:name>
-            <spirit:value>Tue Apr 21 04:15:53 UTC 2026</spirit:value>
+            <spirit:value>Fri Apr 24 04:18:39 UTC 2026</spirit:value>
           </spirit:parameter>
           <spirit:parameter>
             <spirit:name>outputProductCRC</spirit:name>
-            <spirit:value>9:0032038b</spirit:value>
+            <spirit:value>9:5639c192</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -688,11 +688,11 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>GENtimestamp</spirit:name>
-            <spirit:value>Tue Apr 21 04:15:53 UTC 2026</spirit:value>
+            <spirit:value>Fri Apr 24 04:18:39 UTC 2026</spirit:value>
           </spirit:parameter>
           <spirit:parameter>
             <spirit:name>outputProductCRC</spirit:name>
-            <spirit:value>9:43754734</spirit:value>
+            <spirit:value>9:0da428cb</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -1056,7 +1056,7 @@
     <spirit:fileSet>
       <spirit:name>xilinx_verilogsynthesis_view_fileset</spirit:name>
       <spirit:file>
-        <spirit:name>../../ipshared/4889/hdl/dds_pdm_v1_0_S00_AXI.v</spirit:name>
+        <spirit:name>../../ipshared/251f/hdl/dds_pdm_v1_0_S00_AXI.v</spirit:name>
         <spirit:fileType>verilogSource</spirit:fileType>
       </spirit:file>
       <spirit:file>
@@ -1072,7 +1072,7 @@
         <spirit:fileType>systemVerilogSource</spirit:fileType>
       </spirit:file>
       <spirit:file>
-        <spirit:name>../../ipshared/4889/hdl/dds_pdm_v1_0.v</spirit:name>
+        <spirit:name>../../ipshared/251f/hdl/dds_pdm_v1_0.v</spirit:name>
         <spirit:fileType>verilogSource</spirit:fileType>
       </spirit:file>
     </spirit:fileSet>
@@ -1087,7 +1087,7 @@
     <spirit:fileSet>
       <spirit:name>xilinx_verilogbehavioralsimulation_view_fileset</spirit:name>
       <spirit:file>
-        <spirit:name>../../ipshared/4889/hdl/dds_pdm_v1_0_S00_AXI.v</spirit:name>
+        <spirit:name>../../ipshared/251f/hdl/dds_pdm_v1_0_S00_AXI.v</spirit:name>
         <spirit:fileType>verilogSource</spirit:fileType>
       </spirit:file>
       <spirit:file>
@@ -1103,7 +1103,7 @@
         <spirit:fileType>systemVerilogSource</spirit:fileType>
       </spirit:file>
       <spirit:file>
-        <spirit:name>../../ipshared/4889/hdl/dds_pdm_v1_0.v</spirit:name>
+        <spirit:name>../../ipshared/251f/hdl/dds_pdm_v1_0.v</spirit:name>
         <spirit:fileType>verilogSource</spirit:fileType>
       </spirit:file>
     </spirit:fileSet>
@@ -1203,7 +1203,7 @@
   <spirit:vendorExtensions>
     <xilinx:coreExtensions>
       <xilinx:displayName>DDS PDM Audio</xilinx:displayName>
-      <xilinx:coreRevision>6</xilinx:coreRevision>
+      <xilinx:coreRevision>10</xilinx:coreRevision>
       <xilinx:configElementInfos>
         <xilinx:configElementInfo xilinx:referenceId="BUSIFPARAM_VALUE.S00_AXI.ADDR_WIDTH" xilinx:valueSource="auto" xilinx:valuePermission="bd"/>
         <xilinx:configElementInfo xilinx:referenceId="BUSIFPARAM_VALUE.S00_AXI.ARUSER_WIDTH" xilinx:valueSource="constant" xilinx:valuePermission="bd"/>
@@ -1252,7 +1252,7 @@
       <xilinx:xilinxVersion>2022.2</xilinx:xilinxVersion>
       <xilinx:checksum xilinx:scope="busInterfaces" xilinx:value="7a63f3fc"/>
       <xilinx:checksum xilinx:scope="memoryMaps" xilinx:value="ed1368d5"/>
-      <xilinx:checksum xilinx:scope="fileGroups" xilinx:value="a93690f8"/>
+      <xilinx:checksum xilinx:scope="fileGroups" xilinx:value="aee53570"/>
       <xilinx:checksum xilinx:scope="ports" xilinx:value="00da77bd"/>
       <xilinx:checksum xilinx:scope="hdlParameters" xilinx:value="2e811c89"/>
       <xilinx:checksum xilinx:scope="parameters" xilinx:value="241fbe8b"/>

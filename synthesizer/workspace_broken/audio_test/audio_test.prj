@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="ASCII"?>
+<sdkproject:SdkProject xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:sdkproject="http://www.xilinx.com/sdkproject" name="audio_test" location="D:/ece385/final/ece385-final/synthesizer/workspace/audio_test" platform="D:/ece385/final/ece385-final/synthesizer/workspace/mb_platform/export/mb_platform/mb_platform.xpfm" platformUID="xilinx:::0.0(custom)" systemProject="audio_test_system" sysConfig="mb_platform" runtime="C/C++" cpu="standalone_domain" cpuInstance="microblaze_0" os="standalone" mssSignature="f57bcf7a42bd056f80121ed87b2aedf4">
+  <configuration name="Debug" id="xilinx.gnu.mb.exe.debug.1624042398">
+    <configBuildOptions xsi:type="sdkproject:SdkOptions"/>
+    <lastBuildOptions xsi:type="sdkproject:SdkOptions"/>
+  </configuration>
+  <configuration name="Release" id="xilinx.gnu.mb.exe.release.487023556" dirty="true">
+    <configBuildOptions xsi:type="sdkproject:SdkOptions"/>
+  </configuration>
+  <template appTemplateName="empty_application"/>
+</sdkproject:SdkProject>

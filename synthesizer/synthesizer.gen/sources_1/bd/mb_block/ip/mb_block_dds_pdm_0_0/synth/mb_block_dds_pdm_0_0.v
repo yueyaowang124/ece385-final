@@ -48,11 +48,11 @@
 
 
 // IP VLNV: xilinx.com:user:dds_pdm:1.0
-// IP Revision: 6
+// IP Revision: 10
 
 (* X_CORE_INFO = "dds_pdm_v1_0,Vivado 2022.2" *)
 (* CHECK_LICENSE_TYPE = "mb_block_dds_pdm_0_0,dds_pdm_v1_0,{}" *)
-(* CORE_GENERATION_INFO = "mb_block_dds_pdm_0_0,dds_pdm_v1_0,{x_ipProduct=Vivado 2022.2,x_ipVendor=xilinx.com,x_ipLibrary=user,x_ipName=dds_pdm,x_ipVersion=1.0,x_ipCoreRevision=6,x_ipLanguage=VERILOG,x_ipSimLanguage=MIXED,C_S00_AXI_DATA_WIDTH=32,C_S00_AXI_ADDR_WIDTH=5}" *)
+(* CORE_GENERATION_INFO = "mb_block_dds_pdm_0_0,dds_pdm_v1_0,{x_ipProduct=Vivado 2022.2,x_ipVendor=xilinx.com,x_ipLibrary=user,x_ipName=dds_pdm,x_ipVersion=1.0,x_ipCoreRevision=10,x_ipLanguage=VERILOG,x_ipSimLanguage=MIXED,C_S00_AXI_DATA_WIDTH=32,C_S00_AXI_ADDR_WIDTH=5}" *)
 (* DowngradeIPIdentifiedWarnings = "yes" *)
 module mb_block_dds_pdm_0_0 (
   audio_pdm_out,

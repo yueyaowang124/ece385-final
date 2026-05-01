@@ -1,84 +1,63 @@
-timestamp=[2026-04-18 15:59:33], mode=WORKBENCH_START, duration=0:00:03.505, duration_ms=3505, data={}
-timestamp=[2026-04-18 15:59:33], mode=WORKBENCH_UI_INIT, duration=0:00:00.314, duration_ms=314, data={editors_count=0, platform_editors_count=0, projects_count=0, platform_projects_count=0, active_platform_editor=false, projects=}
-timestamp=[2026-04-18 15:59:33], mode=PLATFORM_REPOSITORY_INIT, duration=0:00:00.041, duration_ms=41, data={}
-timestamp=[2026-04-18 16:00:02], mode=PLATFORM_CREATION, duration=0:00:00.942, duration_ms=942, data={platform_source=dsa, os=standalone, processor=microblaze, platform=null}
-timestamp=[2026-04-18 16:00:21], mode=PLATFORM_GENERATION, duration=0:00:02.053, duration_ms=2053, data={name=mb_platform}
-timestamp=[2026-04-18 16:16:40], mode=PLATFORM_GENERATION, duration=0:00:01.571, duration_ms=1571, data={name=mb_platform}
-timestamp=[2026-04-18 16:19:03], mode=PLATFORM_GENERATION, duration=0:00:01.310, duration_ms=1310, data={name=mb_platform}
-timestamp=[2026-04-18 16:19:13], mode=PLATFORM_GENERATION, duration=0:00:01.244, duration_ms=1244, data={name=mb_platform}
-timestamp=[2026-04-18 16:19:22], mode=PLATFORM_GENERATION, duration=0:00:01.451, duration_ms=1451, data={name=mb_platform}
-timestamp=[2026-04-18 16:22:50], mode=PLATFORM_GENERATION, duration=0:00:01.274, duration_ms=1274, data={name=mb_platform}
-timestamp=[2026-04-18 16:22:55], mode=PLATFORM_GENERATION, duration=0:00:02.282, duration_ms=2282, data={name=mb_platform}
-timestamp=[2026-04-18 16:23:24], mode=PLATFORM_GENERATION, duration=0:00:01.438, duration_ms=1438, data={name=mb_platform}
-timestamp=[2026-04-18 16:23:29], mode=PLATFORM_GENERATION, duration=0:00:01.499, duration_ms=1499, data={name=mb_platform}
-timestamp=[2026-04-18 16:23:44], mode=PLATFORM_GENERATION, duration=0:00:01.477, duration_ms=1477, data={name=mb_platform}
-timestamp=[2026-04-18 16:23:49], mode=PLATFORM_GENERATION, duration=0:00:01.547, duration_ms=1547, data={name=mb_platform}
-timestamp=[2026-04-18 16:25:35], mode=PLATFORM_GENERATION, duration=0:00:01.458, duration_ms=1458, data={name=mb_platform}
-timestamp=[2026-04-18 16:25:40], mode=PLATFORM_GENERATION, duration=0:00:02.472, duration_ms=2472, data={name=mb_platform}
-timestamp=[2026-04-18 16:27:43], mode=APP_CREATION, duration=0:00:00.933, duration_ms=933, data={name=audio_test, project_type=sdk, os=standalone, processor=microblaze_0, runtime=C/C++, platform=mb_platform, application_type=application}
-timestamp=[2026-04-18 16:30:40], mode=BUILD, duration=0:00:02.497, duration_ms=2497, data={name=audio_test, configuration=Debug, clean_build=false}
-timestamp=[2026-04-18 16:32:36], mode=PLATFORM_GENERATION, duration=0:00:01.750, duration_ms=1750, data={name=mb_platform}
-timestamp=[2026-04-18 16:32:46], mode=PLATFORM_GENERATION, duration=0:00:06.636, duration_ms=6636, data={name=mb_platform}
-timestamp=[2026-04-18 16:34:46], mode=PLATFORM_GENERATION, duration=0:00:03.609, duration_ms=3609, data={name=mb_platform}
-timestamp=[2026-04-18 16:35:02], mode=PLATFORM_GENERATION, duration=0:00:03.519, duration_ms=3519, data={name=mb_platform}
-timestamp=[2026-04-18 16:35:15], mode=PLATFORM_GENERATION, duration=0:00:03.525, duration_ms=3525, data={name=mb_platform}
-timestamp=[2026-04-18 16:35:33], mode=BUILD, duration=0:00:00.188, duration_ms=188, data={name=audio_test, configuration=Debug, clean_build=true}
-timestamp=[2026-04-18 16:35:33], mode=BUILD, duration=0:00:00.129, duration_ms=129, data={name=audio_test_system, configuration=Debug, clean_build=true}
-timestamp=[2026-04-18 16:35:36], mode=PLATFORM_GENERATION, duration=0:00:03.596, duration_ms=3596, data={name=mb_platform}
-timestamp=[2026-04-18 16:35:40], mode=PLATFORM_GENERATION, duration=0:00:03.555, duration_ms=3555, data={name=mb_platform}
-timestamp=[2026-04-18 16:37:16], mode=PLATFORM_GENERATION, duration=0:00:03.535, duration_ms=3535, data={name=mb_platform}
-timestamp=[2026-04-18 16:37:25], mode=PLATFORM_GENERATION, duration=0:00:03.602, duration_ms=3602, data={name=mb_platform}
-timestamp=[2026-04-18 16:38:50], mode=WORKBENCH_START, duration=0:00:04.612, duration_ms=4612, data={}
-timestamp=[2026-04-18 16:38:50], mode=WORKBENCH_UI_INIT, duration=0:00:00.518, duration_ms=518, data={editors_count=4, platform_editors_count=1, projects_count=4, platform_projects_count=1, active_platform_editor=true, projects=RemoteSystemsTempFiles,audio_test,audio_test_system,mb_platform}
-timestamp=[2026-04-18 16:38:51], mode=PLATFORM_REPOSITORY_INIT, duration=0:00:00.021, duration_ms=21, data={}
-timestamp=[2026-04-18 16:39:21], mode=PLATFORM_GENERATION, duration=0:00:01.683, duration_ms=1683, data={name=mb_platform}
-timestamp=[2026-04-18 16:39:28], mode=PLATFORM_GENERATION, duration=0:00:03.622, duration_ms=3622, data={name=mb_platform}
-timestamp=[2026-04-18 16:46:09], mode=PLATFORM_GENERATION, duration=0:00:03.608, duration_ms=3608, data={name=mb_platform}
-timestamp=[2026-04-18 16:52:19], mode=BUILD, duration=0:00:00.688, duration_ms=688, data={name=audio_test, configuration=Debug, clean_build=false}
-timestamp=[2026-04-18 17:16:18], mode=PLATFORM_GENERATION, duration=0:00:06.086, duration_ms=6086, data={name=mb_platform}
-timestamp=[2026-04-18 17:16:30], mode=BUILD, duration=0:00:00.314, duration_ms=314, data={name=audio_test, configuration=Debug, clean_build=false}
-timestamp=[2026-04-18 17:19:48], mode=BUILD, duration=0:00:00.772, duration_ms=772, data={name=audio_test, configuration=Debug, clean_build=false}
-timestamp=[2026-04-18 17:24:00], mode=WORKBENCH_START, duration=0:00:05.503, duration_ms=5503, data={}
-timestamp=[2026-04-18 17:24:01], mode=WORKBENCH_UI_INIT, duration=0:00:00.634, duration_ms=634, data={editors_count=6, platform_editors_count=3, projects_count=4, platform_projects_count=1, active_platform_editor=false, projects=RemoteSystemsTempFiles,audio_test,audio_test_system,mb_platform}
-timestamp=[2026-04-18 17:24:01], mode=PLATFORM_REPOSITORY_INIT, duration=0:00:00.023, duration_ms=23, data={}
-timestamp=[2026-04-18 17:52:20], mode=PLATFORM_GENERATION, duration=0:00:06.282, duration_ms=6282, data={name=mb_platform}
-timestamp=[2026-04-18 17:52:26], mode=BUILD, duration=0:00:00.766, duration_ms=766, data={name=audio_test, configuration=Debug, clean_build=false}
-timestamp=[2026-04-18 17:53:05], mode=WORKBENCH_START, duration=0:00:06.274, duration_ms=6274, data={}
-timestamp=[2026-04-18 17:53:05], mode=WORKBENCH_UI_INIT, duration=0:00:00.625, duration_ms=625, data={editors_count=6, platform_editors_count=3, projects_count=4, platform_projects_count=1, active_platform_editor=true, projects=RemoteSystemsTempFiles,audio_test,audio_test_system,mb_platform}
-timestamp=[2026-04-18 17:53:06], mode=PLATFORM_REPOSITORY_INIT, duration=0:00:00.045, duration_ms=45, data={}
-timestamp=[2026-04-18 17:53:26], mode=BUILD, duration=0:00:00.227, duration_ms=227, data={name=audio_test, configuration=Debug, clean_build=false}
-timestamp=[2026-04-18 18:01:21], mode=PLATFORM_GENERATION, duration=0:00:03.348, duration_ms=3348, data={name=mb_platform}
-timestamp=[2026-04-18 18:01:21], mode=BUILD, duration=0:00:00.254, duration_ms=254, data={name=audio_test, configuration=Debug, clean_build=true}
-timestamp=[2026-04-18 18:01:28], mode=PLATFORM_GENERATION, duration=0:00:04.089, duration_ms=4089, data={name=mb_platform}
-timestamp=[2026-04-18 18:01:28], mode=BUILD, duration=0:00:00.633, duration_ms=633, data={name=audio_test, configuration=Debug, clean_build=false}
-timestamp=[2026-04-18 18:02:38], mode=WORKBENCH_START, duration=0:00:06.411, duration_ms=6411, data={}
-timestamp=[2026-04-18 18:02:39], mode=WORKBENCH_UI_INIT, duration=0:00:00.729, duration_ms=729, data={editors_count=6, platform_editors_count=3, projects_count=4, platform_projects_count=1, active_platform_editor=false, projects=RemoteSystemsTempFiles,audio_test,audio_test_system,mb_platform}
-timestamp=[2026-04-18 18:02:39], mode=PLATFORM_REPOSITORY_INIT, duration=0:00:00.031, duration_ms=31, data={}
-timestamp=[2026-04-18 18:12:59], mode=PLATFORM_GENERATION, duration=0:00:01.900, duration_ms=1900, data={name=mb_platform}
-timestamp=[2026-04-18 18:13:00], mode=BUILD, duration=0:00:00.690, duration_ms=690, data={name=audio_test, configuration=Debug, clean_build=false}
-timestamp=[2026-04-18 22:32:40], mode=BUILD, duration=0:00:00.234, duration_ms=234, data={name=audio_test, configuration=Debug, clean_build=false}
-timestamp=[2026-04-18 22:33:22], mode=BUILD, duration=0:00:00.176, duration_ms=176, data={name=audio_test, configuration=Debug, clean_build=false}
-timestamp=[2026-04-18 23:07:09], mode=BUILD, duration=0:00:00.215, duration_ms=215, data={name=audio_test, configuration=Debug, clean_build=false}
-timestamp=[2026-04-18 23:09:17], mode=BUILD, duration=0:00:00.896, duration_ms=896, data={name=audio_test, configuration=Debug, clean_build=false}
-timestamp=[2026-04-18 23:15:43], mode=BUILD, duration=0:00:00.827, duration_ms=827, data={name=audio_test, configuration=Debug, clean_build=false}
-timestamp=[2026-04-18 23:19:24], mode=BUILD, duration=0:00:00.346, duration_ms=346, data={name=audio_test, configuration=Debug, clean_build=false}
-timestamp=[2026-04-18 23:19:50], mode=BUILD, duration=0:00:00.313, duration_ms=313, data={name=audio_test, configuration=Debug, clean_build=false}
-timestamp=[2026-04-18 23:20:27], mode=BUILD, duration=0:00:00.838, duration_ms=838, data={name=audio_test, configuration=Debug, clean_build=false}
-timestamp=[2026-04-19 00:07:44], mode=PLATFORM_GENERATION, duration=0:00:09.822, duration_ms=9822, data={name=mb_platform}
-timestamp=[2026-04-19 00:08:53], mode=PLATFORM_GENERATION, duration=0:00:04.064, duration_ms=4064, data={name=mb_platform}
-timestamp=[2026-04-19 00:10:05], mode=PLATFORM_GENERATION, duration=0:00:02.104, duration_ms=2104, data={name=mb_platform}
-timestamp=[2026-04-19 00:10:18], mode=PLATFORM_GENERATION, duration=0:00:02.067, duration_ms=2067, data={name=mb_platform}
-timestamp=[2026-04-19 00:10:31], mode=PLATFORM_GENERATION, duration=0:00:07.110, duration_ms=7110, data={name=mb_platform}
-timestamp=[2026-04-19 00:16:43], mode=BUILD, duration=0:00:00.825, duration_ms=825, data={name=audio_test, configuration=Debug, clean_build=false}
-timestamp=[2026-04-19 00:18:36], mode=BUILD, duration=0:00:00.237, duration_ms=237, data={name=audio_test, configuration=Debug, clean_build=false}
-timestamp=[2026-04-19 00:19:19], mode=WORKBENCH_START, duration=0:00:05.869, duration_ms=5869, data={}
-timestamp=[2026-04-19 00:19:20], mode=WORKBENCH_UI_INIT, duration=0:00:00.607, duration_ms=607, data={editors_count=5, platform_editors_count=2, projects_count=4, platform_projects_count=1, active_platform_editor=false, projects=RemoteSystemsTempFiles,audio_test,audio_test_system,mb_platform}
-timestamp=[2026-04-19 00:19:20], mode=PLATFORM_REPOSITORY_INIT, duration=0:00:00.031, duration_ms=31, data={}
-timestamp=[2026-04-19 00:19:25], mode=BUILD, duration=0:00:00.243, duration_ms=243, data={name=audio_test, configuration=Debug, clean_build=false}
-timestamp=[2026-04-20 20:17:09], mode=BUILD, duration=0:00:00.184, duration_ms=184, data={name=audio_test, configuration=Debug, clean_build=false}
-timestamp=[2026-04-20 21:53:01], mode=PLATFORM_GENERATION, duration=0:00:05.868, duration_ms=5868, data={name=mb_platform}
-timestamp=[2026-04-20 21:53:02], mode=BUILD, duration=0:00:00.705, duration_ms=705, data={name=audio_test, configuration=Debug, clean_build=false}
-timestamp=[2026-04-20 23:23:32], mode=PLATFORM_GENERATION, duration=0:00:02.686, duration_ms=2686, data={name=mb_platform}
-timestamp=[2026-04-20 23:23:39], mode=PLATFORM_GENERATION, duration=0:00:05.947, duration_ms=5947, data={name=mb_platform}
-timestamp=[2026-04-20 23:30:22], mode=BUILD, duration=0:00:00.710, duration_ms=710, data={name=audio_test, configuration=Debug, clean_build=false}
-timestamp=[2026-04-20 23:34:46], mode=BUILD, duration=0:00:01.329, duration_ms=1329, data={name=audio_test, configuration=Debug, clean_build=false}
+timestamp=[2026-04-23 20:23:14], mode=WORKBENCH_START, duration=0:00:03.202, duration_ms=3202, data={}
+timestamp=[2026-04-23 20:23:14], mode=WORKBENCH_UI_INIT, duration=0:00:00.354, duration_ms=354, data={editors_count=0, platform_editors_count=0, projects_count=0, platform_projects_count=0, active_platform_editor=false, projects=}
+timestamp=[2026-04-23 20:23:15], mode=PLATFORM_REPOSITORY_INIT, duration=0:00:00.031, duration_ms=31, data={}
+timestamp=[2026-04-23 20:23:41], mode=PLATFORM_CREATION, duration=0:00:02.000, duration_ms=2000, data={platform_source=dsa, os=standalone, processor=microblaze, platform=null}
+timestamp=[2026-04-23 20:23:50], mode=PLATFORM_GENERATION, duration=0:00:04.063, duration_ms=4063, data={name=mb_platform}
+timestamp=[2026-04-23 20:24:19], mode=APP_CREATION, duration=0:00:00.908, duration_ms=908, data={name=synthesizer, project_type=sdk, os=standalone, processor=microblaze_0, runtime=C/C++, platform=mb_platform, application_type=application}
+timestamp=[2026-04-23 20:27:04], mode=BUILD, duration=0:00:00.548, duration_ms=548, data={name=synthesizer, configuration=Debug, clean_build=false}
+timestamp=[2026-04-23 20:30:04], mode=BUILD, duration=0:00:00.770, duration_ms=770, data={name=synthesizer, configuration=Debug, clean_build=false}
+timestamp=[2026-04-23 20:30:07], mode=BUILD, duration=0:00:00.177, duration_ms=177, data={name=synthesizer, configuration=Debug, clean_build=false}
+timestamp=[2026-04-23 21:18:08], mode=PLATFORM_GENERATION, duration=0:00:05.504, duration_ms=5504, data={name=mb_platform}
+timestamp=[2026-04-23 21:18:39], mode=BUILD, duration=0:00:01.067, duration_ms=1067, data={name=synthesizer, configuration=Debug, clean_build=false}
+timestamp=[2026-04-23 21:26:06], mode=PLATFORM_GENERATION, duration=0:00:06.513, duration_ms=6513, data={name=mb_platform}
+timestamp=[2026-04-23 21:26:06], mode=BUILD, duration=0:00:00.237, duration_ms=237, data={name=synthesizer, configuration=Debug, clean_build=true}
+timestamp=[2026-04-23 21:26:08], mode=BUILD, duration=0:00:01.095, duration_ms=1095, data={name=synthesizer, configuration=Debug, clean_build=false}
+timestamp=[2026-04-23 21:27:02], mode=PLATFORM_GENERATION, duration=0:00:07.908, duration_ms=7908, data={name=mb_platform}
+timestamp=[2026-04-23 21:27:12], mode=PLATFORM_GENERATION, duration=0:00:03.591, duration_ms=3591, data={name=mb_platform}
+timestamp=[2026-04-23 21:27:17], mode=BUILD, duration=0:00:00.327, duration_ms=327, data={name=synthesizer, configuration=Debug, clean_build=false}
+timestamp=[2026-04-23 21:27:28], mode=PLATFORM_GENERATION, duration=0:00:01.609, duration_ms=1609, data={name=mb_platform}
+timestamp=[2026-04-23 21:28:01], mode=PLATFORM_GENERATION, duration=0:00:06.476, duration_ms=6476, data={name=mb_platform}
+timestamp=[2026-04-23 21:28:13], mode=PLATFORM_GENERATION, duration=0:00:03.200, duration_ms=3200, data={name=mb_platform}
+timestamp=[2026-04-23 21:28:14], mode=BUILD, duration=0:00:00.290, duration_ms=290, data={name=synthesizer, configuration=Debug, clean_build=true}
+timestamp=[2026-04-23 21:28:18], mode=PLATFORM_GENERATION, duration=0:00:04.279, duration_ms=4279, data={name=mb_platform}
+timestamp=[2026-04-23 21:28:20], mode=BUILD, duration=0:00:01.513, duration_ms=1513, data={name=synthesizer, configuration=Debug, clean_build=false}
+timestamp=[2026-04-23 21:29:46], mode=PLATFORM_GENERATION, duration=0:00:03.004, duration_ms=3004, data={name=mb_platform}
+timestamp=[2026-04-23 21:29:47], mode=BUILD, duration=0:00:00.149, duration_ms=149, data={name=synthesizer, configuration=Debug, clean_build=true}
+timestamp=[2026-04-23 21:29:54], mode=PLATFORM_GENERATION, duration=0:00:03.699, duration_ms=3699, data={name=mb_platform}
+timestamp=[2026-04-23 21:29:56], mode=BUILD, duration=0:00:01.420, duration_ms=1420, data={name=synthesizer, configuration=Debug, clean_build=false}
+timestamp=[2026-04-23 21:31:55], mode=PLATFORM_GENERATION, duration=0:00:05.590, duration_ms=5590, data={name=mb_platform}
+timestamp=[2026-04-23 21:31:58], mode=BUILD, duration=0:00:01.020, duration_ms=1020, data={name=synthesizer, configuration=Debug, clean_build=false}
+timestamp=[2026-04-23 21:34:14], mode=WORKBENCH_START, duration=0:00:04.578, duration_ms=4578, data={}
+timestamp=[2026-04-23 21:34:14], mode=WORKBENCH_UI_INIT, duration=0:00:00.542, duration_ms=542, data={editors_count=3, platform_editors_count=0, projects_count=4, platform_projects_count=1, active_platform_editor=false, projects=RemoteSystemsTempFiles,mb_platform,synthesizer,synthesizer_system}
+timestamp=[2026-04-23 21:34:14], mode=PLATFORM_REPOSITORY_INIT, duration=0:00:00.022, duration_ms=22, data={}
+timestamp=[2026-04-23 21:34:46], mode=PLATFORM_GENERATION, duration=0:00:05.208, duration_ms=5208, data={name=mb_platform}
+timestamp=[2026-04-23 21:34:52], mode=BUILD, duration=0:00:01.250, duration_ms=1250, data={name=synthesizer, configuration=Debug, clean_build=false}
+timestamp=[2026-04-23 22:16:07], mode=PLATFORM_GENERATION, duration=0:00:05.389, duration_ms=5389, data={name=mb_platform}
+timestamp=[2026-04-23 22:16:13], mode=BUILD, duration=0:00:01.016, duration_ms=1016, data={name=synthesizer, configuration=Debug, clean_build=false}
+timestamp=[2026-04-23 22:17:27], mode=WORKBENCH_START, duration=0:00:04.417, duration_ms=4417, data={}
+timestamp=[2026-04-23 22:17:27], mode=WORKBENCH_UI_INIT, duration=0:00:00.493, duration_ms=493, data={editors_count=3, platform_editors_count=0, projects_count=4, platform_projects_count=1, active_platform_editor=false, projects=RemoteSystemsTempFiles,mb_platform,synthesizer,synthesizer_system}
+timestamp=[2026-04-23 22:17:27], mode=PLATFORM_REPOSITORY_INIT, duration=0:00:00.019, duration_ms=19, data={}
+timestamp=[2026-04-23 22:17:55], mode=PLATFORM_GENERATION, duration=0:00:05.490, duration_ms=5490, data={name=mb_platform}
+timestamp=[2026-04-23 22:17:58], mode=BUILD, duration=0:00:00.862, duration_ms=862, data={name=synthesizer, configuration=Debug, clean_build=false}
+timestamp=[2026-04-23 22:21:23], mode=WORKBENCH_START, duration=0:00:04.678, duration_ms=4678, data={}
+timestamp=[2026-04-23 22:21:23], mode=WORKBENCH_UI_INIT, duration=0:00:00.577, duration_ms=577, data={editors_count=3, platform_editors_count=0, projects_count=4, platform_projects_count=1, active_platform_editor=false, projects=RemoteSystemsTempFiles,mb_platform,synthesizer,synthesizer_system}
+timestamp=[2026-04-23 22:21:23], mode=PLATFORM_REPOSITORY_INIT, duration=0:00:00.013, duration_ms=13, data={}
+timestamp=[2026-04-23 22:21:33], mode=BUILD, duration=0:00:00.197, duration_ms=197, data={name=synthesizer, configuration=Debug, clean_build=true}
+timestamp=[2026-04-23 22:21:34], mode=BUILD, duration=0:00:01.203, duration_ms=1203, data={name=synthesizer, configuration=Debug, clean_build=false}
+timestamp=[2026-04-23 22:47:31], mode=BUILD, duration=0:00:00.250, duration_ms=250, data={name=synthesizer, configuration=Debug, clean_build=false}
+timestamp=[2026-04-23 22:50:25], mode=BUILD, duration=0:00:00.532, duration_ms=532, data={name=synthesizer, configuration=Debug, clean_build=false}
+timestamp=[2026-04-23 22:56:34], mode=BUILD, duration=0:00:00.512, duration_ms=512, data={name=synthesizer, configuration=Debug, clean_build=false}
+timestamp=[2026-04-23 23:02:27], mode=BUILD, duration=0:00:00.608, duration_ms=608, data={name=synthesizer, configuration=Debug, clean_build=false}
+timestamp=[2026-04-23 23:26:41], mode=PLATFORM_GENERATION, duration=0:00:05.618, duration_ms=5618, data={name=mb_platform}
+timestamp=[2026-04-23 23:26:46], mode=BUILD, duration=0:00:00.925, duration_ms=925, data={name=synthesizer, configuration=Debug, clean_build=false}
+timestamp=[2026-04-24 10:34:10], mode=WORKBENCH_START, duration=0:00:08.416, duration_ms=8416, data={}
+timestamp=[2026-04-24 10:34:11], mode=WORKBENCH_UI_INIT, duration=0:00:00.756, duration_ms=756, data={editors_count=14, platform_editors_count=0, projects_count=4, platform_projects_count=1, active_platform_editor=false, projects=RemoteSystemsTempFiles,mb_platform,synthesizer,synthesizer_system}
+timestamp=[2026-04-24 10:34:12], mode=PLATFORM_REPOSITORY_INIT, duration=0:00:00.064, duration_ms=64, data={}
+timestamp=[2026-04-24 10:34:42], mode=BUILD, duration=0:00:00.277, duration_ms=277, data={name=synthesizer, configuration=Debug, clean_build=false}
+timestamp=[2026-04-30 19:36:32], mode=WORKBENCH_START, duration=0:00:06.315, duration_ms=6315, data={}
+timestamp=[2026-04-30 19:36:33], mode=WORKBENCH_UI_INIT, duration=0:00:00.678, duration_ms=678, data={editors_count=14, platform_editors_count=0, projects_count=4, platform_projects_count=1, active_platform_editor=false, projects=RemoteSystemsTempFiles,mb_platform,synthesizer,synthesizer_system}
+timestamp=[2026-04-30 19:36:33], mode=PLATFORM_REPOSITORY_INIT, duration=0:00:00.082, duration_ms=82, data={}
+timestamp=[2026-04-30 19:40:57], mode=PLATFORM_GENERATION, duration=0:00:04.483, duration_ms=4483, data={name=mb_platform}
+timestamp=[2026-04-30 19:41:42], mode=BUILD, duration=0:00:00.418, duration_ms=418, data={name=synthesizer, configuration=Debug, clean_build=false}
+timestamp=[2026-04-30 19:42:59], mode=BUILD, duration=0:00:00.242, duration_ms=242, data={name=synthesizer, configuration=Debug, clean_build=false}
+timestamp=[2026-04-30 19:43:21], mode=BUILD, duration=0:00:00.254, duration_ms=254, data={name=synthesizer, configuration=Debug, clean_build=false}
