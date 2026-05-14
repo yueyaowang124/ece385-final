@@ -1,0 +1,13 @@
+module wave_rom (
+	input logic clock,
+	input logic [10:0] address,
+	output logic [3:0] q
+);
+
+logic [3:0] memory [0:1599] /* synthesis ram_init_file = "./wave/wave.COE" */;
+
+always_ff @ (posedge clock) begin
+	q <= memory[address];
+end
+
+endmodule

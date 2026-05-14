@@ -77,7 +77,7 @@ ENTITY mb_block_axi_intc_0_0 IS
     s_axi_rresp : OUT STD_LOGIC_VECTOR(1 DOWNTO 0);
     s_axi_rvalid : OUT STD_LOGIC;
     s_axi_rready : IN STD_LOGIC;
-    intr : IN STD_LOGIC_VECTOR(3 DOWNTO 0);
+    intr : IN STD_LOGIC_VECTOR(4 DOWNTO 0);
     irq : OUT STD_LOGIC
   );
 END mb_block_axi_intc_0_0;
@@ -134,7 +134,7 @@ ARCHITECTURE mb_block_axi_intc_0_0_arch OF mb_block_axi_intc_0_0 IS
       s_axi_rresp : OUT STD_LOGIC_VECTOR(1 DOWNTO 0);
       s_axi_rvalid : OUT STD_LOGIC;
       s_axi_rready : IN STD_LOGIC;
-      intr : IN STD_LOGIC_VECTOR(3 DOWNTO 0);
+      intr : IN STD_LOGIC_VECTOR(4 DOWNTO 0);
       processor_clk : IN STD_LOGIC;
       processor_rst : IN STD_LOGIC;
       irq : OUT STD_LOGIC;
@@ -147,7 +147,7 @@ ARCHITECTURE mb_block_axi_intc_0_0_arch OF mb_block_axi_intc_0_0 IS
   END COMPONENT axi_intc;
   ATTRIBUTE X_INTERFACE_INFO : STRING;
   ATTRIBUTE X_INTERFACE_PARAMETER : STRING;
-  ATTRIBUTE X_INTERFACE_PARAMETER OF intr: SIGNAL IS "XIL_INTERFACENAME interrupt_input, SENSITIVITY LEVEL_HIGH:LEVEL_HIGH:EDGE_RISING:EDGE_RISING, PORTWIDTH 4";
+  ATTRIBUTE X_INTERFACE_PARAMETER OF intr: SIGNAL IS "XIL_INTERFACENAME interrupt_input, SENSITIVITY NULL:LEVEL_HIGH:LEVEL_HIGH:EDGE_RISING:EDGE_RISING, PORTWIDTH 5";
   ATTRIBUTE X_INTERFACE_INFO OF intr: SIGNAL IS "xilinx.com:signal:interrupt:1.0 interrupt_input INTERRUPT";
   ATTRIBUTE X_INTERFACE_PARAMETER OF irq: SIGNAL IS "XIL_INTERFACENAME interrupt, SENSITIVITY LEVEL_HIGH, LOW_LATENCY 0";
   ATTRIBUTE X_INTERFACE_INFO OF irq: SIGNAL IS "xilinx.com:interface:mbinterrupt:1.0 interrupt INTERRUPT";
@@ -181,7 +181,7 @@ BEGIN
       C_INSTANCE => "mb_block_axi_intc_0_0",
       C_S_AXI_ADDR_WIDTH => 9,
       C_S_AXI_DATA_WIDTH => 32,
-      C_NUM_INTR_INPUTS => 4,
+      C_NUM_INTR_INPUTS => 5,
       C_NUM_SW_INTR => 0,
       C_KIND_OF_INTR => X"fffffff3",
       C_KIND_OF_EDGE => X"FFFFFFFF",

@@ -31,7 +31,6 @@ XTmrCtr Usb_timer;
 //Initialization of SPI port is already done for you
 void SPI_init() {
 
-	xil_printf("Initializing SPI\n");
 
 	ConfigPtr = XSpi_LookupConfig(XPAR_SPI_USB_DEVICE_ID);
 	if (ConfigPtr == NULL) 
@@ -45,15 +44,8 @@ void SPI_init() {
 		return XST_FAILURE;
 	}
 
-	if (Status != XST_SUCCESS)
-	{
-		xil_printf ("SPI device failed to initialize %d", Status);
-	}
 	Status = XSpi_SetOptions(&SpiInstance, XSP_MASTER_OPTION | XSP_MANUAL_SSELECT_OPTION);
-	if (Status != XST_SUCCESS)
-	{
-		xil_printf ("SPI device failed to go into master mode %d", Status);
-	}
+
 
 	XSpi_Start(&SpiInstance);
 	XSpi_IntrGlobalDisable(&SpiInstance);
@@ -89,10 +81,7 @@ void MAXreg_wr(BYTE reg, BYTE val)
 	
 	//read return code from SPI peripheral (see Xilinx examples) 
 	//if return code != 0 print an error
-	if(return_code != XST_SUCCESS)	
-	{
-		xil_printf ("MAXreg_wr failed, return_code = %d", return_code);
-	}
+
 	//deselect MAX3421E (may not be necessary if you are using SPI peripheral)
 	XSpi_SetSlaveSelect(&SpiInstance, 0x00);
 }
@@ -126,10 +115,7 @@ BYTE* MAXbytes_wr(BYTE reg, BYTE nbytes, BYTE* data)
 
 	//read return code from SPI peripheral 
 	//if return code != 0 print an error
-	if(return_code != XST_SUCCESS)	
-	{
-		xil_printf ("MAXbytes_wr failed, return_code = %d", return_code);
-	}
+
 
 	//deselect MAX3421E (may not be necessary if you are using SPI peripheral)
 	XSpi_SetSlaveSelect(&SpiInstance, 0x00);
@@ -163,10 +149,7 @@ BYTE MAXreg_rd(BYTE reg)
 	
 	//read return code from SPI peripheral 
 	//if return code != 0 print an error
-	if(return_code != XST_SUCCESS)	
-	{
-		xil_printf ("MAXreg_rd failed, return_code = %d", return_code);
-	}
+
 	//deselect MAX3421E (may not be necessary if you are using SPI peripheral)
 	XSpi_SetSlaveSelect(&SpiInstance, 0x00);
 	//return val
@@ -203,11 +186,7 @@ BYTE* MAXbytes_rd(BYTE reg, BYTE nbytes, BYTE* data)
 	int return_code = XSpi_Transfer(&SpiInstance, send, receive, nbytes+1);
 	
 	//read return code from SPI peripheral 
-	//if return code != 0 print an error
-	if(return_code != XST_SUCCESS)	
-	{
-		xil_printf ("MAXbytes_rd failed, return_code = %d", return_code);
-	}
+
 
 	//deselect MAX3421E (may not be necessary if you are using SPI peripheral)
 	XSpi_SetSlaveSelect(&SpiInstance, 0x00);
@@ -230,22 +209,16 @@ void MAX3421E_reset(void)
 
 	//hardware reset, then software reset
 	XGpio_DiscreteClear(&Gpio_rst, 1, 0x1);
-	xil_printf ("Holding USB in Reset\n");
 	for (int delay = 0; delay < 0x7FFFF; delay ++){}
 	XGpio_DiscreteSet(&Gpio_rst, 1, 0x1);
-	xil_printf ("Revision is: %d, if this reads 0 check your MAXreg_rd \n", MAXreg_rd( rREVISION));
+
 	BYTE tmp = 0;
 
 	MAXreg_wr( rUSBCTL, bmCHIPRES);      //Chip (soft) reset. This stops the oscillator
 	MAXreg_wr( rUSBCTL, 0x00);           //Remove the reset
 
-	xil_printf("Waiting for PLL to stabilize: ");
 	while (!(MAXreg_rd( rUSBIRQ) & bmOSCOKIRQ)) { //wait until the PLL stabilizes
 		tmp++;                                      //timeout after 256 attempts
-		xil_printf(".\n");
-		if (tmp == 0) {
-			xil_printf("reset timeout!, check your MAXreg_wr\n");
-		}
 	}
 }
 /* turn USB power on/off                                                */
@@ -262,7 +235,7 @@ BOOL Vbus_power(BOOL action) {
     }
     MAXreg_wr( rIOPINS1,tmp );                              //send GPOUT0
     for (int delay = 0; delay < 0xFFFFF; delay ++){}		//delay a couple MS
-    xil_printf ("VBUS power state change \n");
+
     return( TRUE );                                         // power on/off successful
 	return (1);
 }
@@ -281,10 +254,9 @@ void MAX_busprobe(void) {
 		if (usb_task_state != USB_ATTACHED_SUBSTATE_WAIT_RESET_COMPLETE) { //bus reset causes connection detect interrupt
 			if (!(MAXreg_rd( rMODE) & bmLOWSPEED)) {
 				MAXreg_wr( rMODE, MODE_FS_HOST);         //start full-speed host
-				xil_printf("Starting in full speed\n");
 			} else {
 				MAXreg_wr( rMODE, MODE_LS_HOST);    //start low-speed host
-				xil_printf("Starting in low speed\n");
+
 			}
 			usb_task_state = ( USB_STATE_ATTACHED); //signal usb state machine to start attachment sequence
 		}
@@ -293,10 +265,10 @@ void MAX_busprobe(void) {
 		if (usb_task_state != USB_ATTACHED_SUBSTATE_WAIT_RESET_COMPLETE) { //bus reset causes connection detect interrupt
 			if (!(MAXreg_rd( rMODE) & bmLOWSPEED)) {
 				MAXreg_wr( rMODE, MODE_LS_HOST);   //start low-speed host
-				xil_printf("Starting in low speed\n");
+
 			} else {
 				MAXreg_wr( rMODE, MODE_FS_HOST);         //start full-speed host
-				xil_printf("Starting in full speed\n");
+
 			}
 			usb_task_state = ( USB_STATE_ATTACHED); //signal usb state machine to start attachment sequence
 		}
@@ -323,13 +295,10 @@ void MAX3421E_init(void) {
 
 	//start USB timer
 	Status = XTmrCtr_Initialize(&Usb_timer, XPAR_TIMER_USB_AXI_DEVICE_ID);
-	if (Status != XST_SUCCESS) {
-			xil_printf ("Timer instantiation failed\n");
-	}
+
 	XTmrCtr_Start(&Usb_timer, 0);
 
-	xil_printf ("The following should be about 1 second ticks. If they are not, check your timer \n");
-	//Test timer to make sure it is plausible
+
 	for (int i = 0; i < 3; i++)
 	{
 		u32 current = XTmrCtr_GetValue(&Usb_timer, 0);
@@ -337,7 +306,7 @@ void MAX3421E_init(void) {
 		{
 
 		}
-		xil_printf (".tick.\n");
+
 	}
 
 	/* configure power switch   */
@@ -358,7 +327,7 @@ void MAX3421E_init(void) {
 /* MAX3421 state change task and interrupt handler */
 void MAX3421E_Task(void) {
 	if (XGpio_DiscreteRead(&Gpio_int, 1) & 0x01 == 0) {
-		xil_printf("MAX interrupt\n\r");
+
 		MaxIntHandler();
 	}
 	//if ( IORD_ALTERA_AVALON_PIO_DATA(USB_GPX_BASE) == 1) {
@@ -371,7 +340,6 @@ void MaxIntHandler(void) {
 	BYTE HIRQ;
 	BYTE HIRQ_sendback = 0x00;
 	HIRQ = MAXreg_rd( rHIRQ);                  //determine interrupt source
-	xil_printf("IRQ: %x\n", HIRQ);
 	if (HIRQ & bmFRAMEIRQ) {                   //->1ms SOF interrupt handler
 		HIRQ_sendback |= bmFRAMEIRQ;
 	}                   //end FRAMEIRQ handling

@@ -1,0 +1,18 @@
+20:04:10 **** Incremental Build of configuration Debug for project synthesizer ****
+make all 
+'Building file: ../src/sd_spi.c'
+'Invoking: MicroBlaze gcc compiler'
+mb-gcc -Wall -Os -g3 -c -fmessage-length=0 -MT"src/sd_spi.o" -ID:/ece385/final/ece385-final/synthesizer/workspace/mb_platform/export/mb_platform/sw/mb_platform/standalone_domain/bspinclude/include -mno-xl-reorder -mlittle-endian -mxl-barrel-shift -mxl-pattern-compare -mcpu=v11.0 -mno-xl-soft-mul -Wl,--no-relax -ffunction-sections -fdata-sections -MMD -MP -MF"src/sd_spi.d" -MT"src/sd_spi.o" -o "src/sd_spi.o" "../src/sd_spi.c"
+'Finished building: ../src/sd_spi.c'
+' '
+'Building target: synthesizer.elf'
+'Invoking: MicroBlaze gcc linker'
+mb-gcc -Wl,-T -Wl,../src/lscript.ld -LD:/ece385/final/ece385-final/synthesizer/workspace/mb_platform/export/mb_platform/sw/mb_platform/standalone_domain/bsplib/lib -mlittle-endian -mxl-barrel-shift -mxl-pattern-compare -mcpu=v11.0 -mno-xl-soft-mul -Wl,--no-relax -Wl,--gc-sections -o "synthesizer.elf"  ./src/HID.o ./src/MAX3421E.o ./src/main_piano_usb_hdmi.o ./src/sd_spi.o ./src/transfer.o   -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+d:/vitis_2022.2/vitis/2022.2/gnu/microblaze/nt/x86_64-oesdk-mingw32/usr/bin/microblaze-xilinx-elf/../../libexec/microblaze-xilinx-elf/gcc/microblaze-xilinx-elf/11.2.0/real-ld.exe: ./src/sd_spi.o: in function `sd_init':
+D:\ece385\final\ece385-final\synthesizer\workspace\synthesizer\Debug/../src/sd_spi.c:103: undefined reference to `gpio_keymask'
+d:/vitis_2022.2/vitis/2022.2/gnu/microblaze/nt/x86_64-oesdk-mingw32/usr/bin/microblaze-xilinx-elf/../../libexec/microblaze-xilinx-elf/gcc/microblaze-xilinx-elf/11.2.0/real-ld.exe: D:\ece385\final\ece385-final\synthesizer\workspace\synthesizer\Debug/../src/sd_spi.c:110: undefined reference to `gpio_keymask'
+d:/vitis_2022.2/vitis/2022.2/gnu/microblaze/nt/x86_64-oesdk-mingw32/usr/bin/microblaze-xilinx-elf/../../libexec/microblaze-xilinx-elf/gcc/microblaze-xilinx-elf/11.2.0/real-ld.exe: D:\ece385\final\ece385-final\synthesizer\workspace\synthesizer\Debug/../src/sd_spi.c:119: undefined reference to `gpio_keymask'
+collect2.exe: error: ld returned 1 exit status
+make: *** [makefile:38: synthesizer.elf] Error 1
+
+20:04:11 Build Finished (took 628ms)
