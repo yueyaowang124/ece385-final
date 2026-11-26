@@ -24,3 +24,12 @@ RemoteSystemsTempFiles/
 *.elf
 *.bit
 *.mmi
+# Local Python environments and platform metadata
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.DS_Store
+
+# Experiments made from archived sprite inputs
+assets/sprites/source/*/
