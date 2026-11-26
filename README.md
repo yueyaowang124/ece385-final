@@ -6,7 +6,6 @@
 
 Falling Fish combines a playable digital piano, an autoplay music library, and a four-lane rhythm game on an Urbana FPGA board. A USB keyboard controls the system while the FPGA generates audio and renders the interface over HDMI.
 
-Developed jointly by **Yueyao Wang and Sihan Yi**.
 
 **[Watch the course showcase demo →](https://www.youtube.com/watch?v=iHTvJDg6JQU&t=4041s)** — opens at **1:07:21**.  
 **[Read the final project report →](docs/final-report.pdf)**
