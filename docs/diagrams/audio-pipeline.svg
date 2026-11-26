@@ -1,0 +1,108 @@
+<svg viewBox="0 0 920 400" xmlns="http://www.w3.org/2000/svg" font-family="Arial, sans-serif" font-size="12">
+  <defs>
+    <marker id="arr" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L9,3 z" fill="#444"/>
+    </marker>
+    <marker id="arr_grn" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L9,3 z" fill="#2d6a27"/>
+    </marker>
+  </defs>
+
+  <text x="460" y="24" text-anchor="middle" font-size="15" font-weight="bold" fill="#1a1a2e">Figure 2b: Audio Synthesis Pipeline (100 MHz)</text>
+
+  <!-- ===== AXI Registers ===== -->
+  <rect x="10" y="60" width="110" height="120" rx="6" fill="#e2efda" stroke="#5a9e52" stroke-width="2"/>
+  <text x="65" y="80" text-anchor="middle" font-size="11" font-weight="bold" fill="#1a3a17">AXI Registers</text>
+  <text x="65" y="94" text-anchor="middle" font-size="9" fill="#555">(MicroBlaze writes)</text>
+  <line x1="20" y1="104" x2="110" y2="104" stroke="#5a9e52" stroke-width="0.5"/>
+  <text x="20" y="116" font-size="9" fill="#1a3a17">phase_inc[31:0] ×4</text>
+  <text x="20" y="130" font-size="9" fill="#1a3a17">wave_sel[2:0]</text>
+  <text x="20" y="144" font-size="9" fill="#1a3a17">volume[3:0]</text>
+  <text x="20" y="158" font-size="9" fill="#555">@ 0x44A00000</text>
+  <text x="20" y="171" font-size="9" fill="#555">AXI4-Lite</text>
+
+  <!-- Arrow to Phase Acc -->
+  <line x1="120" y1="120" x2="156" y2="120" stroke="#5a9e52" stroke-width="1.5" marker-end="url(#arr_grn)"/>
+  <text x="137" y="113" text-anchor="middle" font-size="8" fill="#555">phase_inc</text>
+
+  <!-- ===== 4× Phase Accumulators ===== -->
+  <rect x="156" y="50" width="130" height="140" rx="6" fill="#dce6f7" stroke="#2d4a8a" stroke-width="2"/>
+  <text x="221" y="70" text-anchor="middle" font-size="11" font-weight="bold" fill="#1a2a5e">Phase Acc ×4</text>
+  <text x="221" y="84" text-anchor="middle" font-size="9" fill="#555">(dds_oscillator)</text>
+  <text x="221" y="100" text-anchor="middle" font-size="9" fill="#1a2a5e">32-bit accumulator</text>
+  <text x="221" y="114" text-anchor="middle" font-size="9" fill="#1a2a5e">acc += phase_inc</text>
+  <text x="221" y="128" text-anchor="middle" font-size="9" fill="#1a2a5e">@ 100 MHz</text>
+  <line x1="164" y1="138" x2="278" y2="138" stroke="#2d4a8a" stroke-width="0.5"/>
+  <text x="168" y="152" font-size="9" fill="#1a2a5e">ch0: melody</text>
+  <text x="168" y="165" font-size="9" fill="#1a2a5e">ch1: +7 semitones</text>
+  <text x="168" y="178" font-size="9" fill="#1a2a5e">ch2/ch3: poly</text>
+
+  <!-- Arrow to Waveform LUT -->
+  <line x1="286" y1="120" x2="322" y2="120" stroke="#2d4a8a" stroke-width="1.5" marker-end="url(#arr)"/>
+  <text x="303" y="113" text-anchor="middle" font-size="8" fill="#555">acc[31:24]</text>
+
+  <!-- ===== Waveform LUT ===== -->
+  <rect x="322" y="45" width="150" height="150" rx="6" fill="#fff2cc" stroke="#d6a800" stroke-width="2"/>
+  <text x="397" y="65" text-anchor="middle" font-size="11" font-weight="bold" fill="#7d5a00">Waveform LUT</text>
+  <text x="397" y="79" text-anchor="middle" font-size="9" fill="#555">(6 types, wave_sel)</text>
+  <line x1="330" y1="88" x2="464" y2="88" stroke="#d6a800" stroke-width="0.5"/>
+  <text x="330" y="101" font-size="9" fill="#7d5a00">■ Square   acc[31]</text>
+  <text x="330" y="115" font-size="9" fill="#7d5a00">■ Triangle |acc-128|</text>
+  <text x="330" y="129" font-size="9" fill="#7d5a00">■ Sawtooth acc[31:24]</text>
+  <text x="330" y="143" font-size="9" fill="#7d5a00">■ Sine     256-entry ROM</text>
+  <text x="330" y="157" font-size="9" fill="#7d5a00">■ Organ    sine+2nd harm</text>
+  <text x="330" y="171" font-size="9" fill="#7d5a00">■ Vibrato  sine+LFO mod</text>
+  <text x="330" y="187" font-size="9" fill="#555">  LFO: inc=215 (~5 Hz)</text>
+
+  <!-- Arrow to Mixer -->
+  <line x1="472" y1="120" x2="508" y2="120" stroke="#d6a800" stroke-width="1.5" marker-end="url(#arr)"/>
+  <text x="489" y="113" text-anchor="middle" font-size="8" fill="#555">s16 out</text>
+
+  <!-- ===== 4-Channel Mixer ===== -->
+  <rect x="508" y="60" width="130" height="120" rx="6" fill="#e2efda" stroke="#5a9e52" stroke-width="2"/>
+  <text x="573" y="80" text-anchor="middle" font-size="11" font-weight="bold" fill="#1a3a17">4-ch Mixer</text>
+  <text x="573" y="94" text-anchor="middle" font-size="9" fill="#555">(dds_mixer)</text>
+  <line x1="516" y1="104" x2="630" y2="104" stroke="#5a9e52" stroke-width="0.5"/>
+  <text x="516" y="116" font-size="9" fill="#1a3a17">sum = ch0+ch1+ch2+ch3</text>
+  <text x="516" y="130" font-size="9" fill="#1a3a17">norm = sum &gt;&gt;&gt; 2</text>
+  <text x="516" y="144" font-size="9" fill="#1a3a17">× volume[3:0]</text>
+  <text x="516" y="158" font-size="9" fill="#555">signed 16-bit output</text>
+  <text x="516" y="172" font-size="9" fill="#555">→ 8-bit truncated</text>
+
+  <!-- Arrow to PDM -->
+  <line x1="638" y1="120" x2="674" y2="120" stroke="#5a9e52" stroke-width="1.5" marker-end="url(#arr_grn)"/>
+  <text x="655" y="113" text-anchor="middle" font-size="8" fill="#555">8-bit</text>
+
+  <!-- ===== PDM Modulator ===== -->
+  <rect x="674" y="60" width="130" height="120" rx="6" fill="#dce6f7" stroke="#2d4a8a" stroke-width="2"/>
+  <text x="739" y="80" text-anchor="middle" font-size="11" font-weight="bold" fill="#1a2a5e">PDM Modulator</text>
+  <text x="739" y="94" text-anchor="middle" font-size="9" fill="#555">(audio_pdm, Δ-Σ)</text>
+  <line x1="682" y1="104" x2="796" y2="104" stroke="#2d4a8a" stroke-width="0.5"/>
+  <text x="682" y="116" font-size="9" fill="#1a2a5e">flip MSB (u8)</text>
+  <text x="682" y="130" font-size="9" fill="#1a2a5e">acc += in (17-bit)</text>
+  <text x="682" y="144" font-size="9" fill="#1a2a5e">pdm = acc[16]</text>
+  <text x="682" y="158" font-size="9" fill="#555">1-bit output</text>
+  <text x="682" y="172" font-size="9" fill="#555">@ 100 MHz</text>
+
+  <!-- Arrow to RC filter -->
+  <line x1="804" y1="120" x2="838" y2="120" stroke="#2d4a8a" stroke-width="1.5" marker-end="url(#arr)"/>
+
+  <!-- ===== RC Filter ===== -->
+  <rect x="838" y="98" width="70" height="44" rx="5" fill="#fce4ec" stroke="#c62828" stroke-width="2"/>
+  <text x="873" y="116" text-anchor="middle" font-size="10" font-weight="bold" fill="#c62828">RC Filter</text>
+  <text x="873" y="130" text-anchor="middle" font-size="9" fill="#c62828">(off-chip)</text>
+
+  <!-- Output -->
+  <line x1="873" y1="142" x2="873" y2="180" stroke="#c62828" stroke-width="2" marker-end="url(#arr)"/>
+  <rect x="823" y="180" width="100" height="36" rx="5" fill="#fce4ec" stroke="#c62828" stroke-width="1.5"/>
+  <text x="873" y="198" text-anchor="middle" font-size="11" font-weight="bold" fill="#c62828">3.5mm Jack</text>
+  <text x="873" y="212" text-anchor="middle" font-size="9" fill="#c62828">Analog audio</text>
+
+  <!-- ===== Channel Roles ===== -->
+  <rect x="10" y="290" width="880" height="100" rx="6" fill="#f8f8f8" stroke="#ccc" stroke-width="1"/>
+  <text x="20" y="308" font-size="11" font-weight="bold" fill="#333">Channel Roles (dds_mixer — 4-channel polyphony):</text>
+  <text x="20" y="326" font-size="10" fill="#333">ch0 — Primary melody note (keymask → PHASE_INC_TABLE lookup, base octave)</text>
+  <text x="20" y="342" font-size="10" fill="#333">ch1 — Perfect fifth harmony (+7 semitones from ch0, always active for auto-play chords)</text>
+  <text x="20" y="358" font-size="10" fill="#333">ch2 — Polyphonic note 2 (second simultaneous key, e.g., chord voicing in manual mode)</text>
+  <text x="20" y="374" font-size="10" fill="#333">ch3 — Polyphonic note 3 (third simultaneous key); all 4 summed and right-shifted 2 to prevent clipping</text>
+</svg>

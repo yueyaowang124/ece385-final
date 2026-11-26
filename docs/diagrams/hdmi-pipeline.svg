@@ -1,0 +1,121 @@
+<svg viewBox="0 0 900 420" xmlns="http://www.w3.org/2000/svg" font-family="Arial, sans-serif" font-size="12">
+  <defs>
+    <marker id="arr" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L9,3 z" fill="#444"/>
+    </marker>
+    <marker id="arr_blue" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L9,3 z" fill="#2d4a8a"/>
+    </marker>
+  </defs>
+
+  <text x="450" y="24" text-anchor="middle" font-size="15" font-weight="bold" fill="#1a1a2e">Figure 2a: HDMI Display Pipeline (piano_display2.sv, 25 MHz)</text>
+
+  <!-- ===== Stage 0: Inputs ===== -->
+  <rect x="10" y="50" width="100" height="44" rx="5" fill="#e8f4f8" stroke="#5b9bd5" stroke-width="1.5"/>
+  <text x="60" y="68" text-anchor="middle" font-size="10" font-weight="bold" fill="#1a2a5e">drawX[9:0]</text>
+  <text x="60" y="82" text-anchor="middle" font-size="10" font-weight="bold" fill="#1a2a5e">drawY[9:0]</text>
+
+  <rect x="10" y="106" width="100" height="44" rx="5" fill="#e8f4f8" stroke="#5b9bd5" stroke-width="1.5"/>
+  <text x="60" y="122" text-anchor="middle" font-size="10" fill="#1a2a5e">GPIO signals</text>
+  <text x="60" y="136" text-anchor="middle" font-size="9" fill="#555">keymask, state,</text>
+  <text x="60" y="146" text-anchor="middle" font-size="9" fill="#555">octave, tiles…</text>
+
+  <!-- Arrow to Layer Computation -->
+  <line x1="110" y1="72" x2="148" y2="72" stroke="#2d4a8a" stroke-width="1.5" marker-end="url(#arr_blue)"/>
+  <line x1="110" y1="128" x2="148" y2="108" stroke="#2d4a8a" stroke-width="1.5" marker-end="url(#arr_blue)"/>
+
+  <!-- ===== Stage 1: 9-Layer Combinational Computation ===== -->
+  <rect x="148" y="40" width="175" height="220" rx="6" fill="#dce6f7" stroke="#2d4a8a" stroke-width="2"/>
+  <text x="235" y="58" text-anchor="middle" font-size="11" font-weight="bold" fill="#1a2a5e">9-Layer Renderer</text>
+  <text x="235" y="70" text-anchor="middle" font-size="9" fill="#555">(combinational logic)</text>
+
+  <!-- Layer list -->
+  <rect x="156" y="76" width="159" height="18" rx="3" fill="#b8cce4"/>
+  <text x="235" y="89" text-anchor="middle" font-size="9" fill="#1a2a5e">L8 Wave sprite (state-gated)</text>
+  <rect x="156" y="97" width="159" height="18" rx="3" fill="#b8cce4"/>
+  <text x="235" y="110" text-anchor="middle" font-size="9" fill="#1a2a5e">L7 Star sprite (SAN output)</text>
+  <rect x="156" y="118" width="159" height="18" rx="3" fill="#b8cce4"/>
+  <text x="235" y="131" text-anchor="middle" font-size="9" fill="#1a2a5e">L6 Win / Lose overlay</text>
+  <rect x="156" y="139" width="159" height="18" rx="3" fill="#b8cce4"/>
+  <text x="235" y="152" text-anchor="middle" font-size="9" fill="#1a2a5e">L5 Pause overlay</text>
+  <rect x="156" y="160" width="159" height="18" rx="3" fill="#b8cce4"/>
+  <text x="235" y="173" text-anchor="middle" font-size="9" fill="#1a2a5e">L4 Countdown digits</text>
+  <rect x="156" y="181" width="159" height="18" rx="3" fill="#b8cce4"/>
+  <text x="235" y="194" text-anchor="middle" font-size="9" fill="#1a2a5e">L3 Score / sidebar text</text>
+  <rect x="156" y="202" width="159" height="18" rx="3" fill="#b8cce4"/>
+  <text x="235" y="215" text-anchor="middle" font-size="9" fill="#1a2a5e">L2 Song selection grid</text>
+  <rect x="156" y="223" width="159" height="18" rx="3" fill="#b8cce4"/>
+  <text x="235" y="236" text-anchor="middle" font-size="9" fill="#1a2a5e">L1 Piano tiles / notes</text>
+  <rect x="156" y="244" width="159" height="18" rx="3" fill="#c6e0b4"/>
+  <text x="235" y="257" text-anchor="middle" font-size="9" fill="#1a3a17">L0 Keyboard background</text>
+
+  <!-- Arrow to Reg1 -->
+  <line x1="323" y1="150" x2="360" y2="150" stroke="#2d4a8a" stroke-width="1.5" marker-end="url(#arr_blue)"/>
+  <text x="341" y="143" text-anchor="middle" font-size="8" fill="#555">addr</text>
+
+  <!-- ===== Register Stage 1 ===== -->
+  <rect x="360" y="125" width="60" height="50" rx="5" fill="#fff2cc" stroke="#d6a800" stroke-width="2"/>
+  <text x="390" y="146" text-anchor="middle" font-size="10" font-weight="bold" fill="#7d5a00">Reg</text>
+  <text x="390" y="160" text-anchor="middle" font-size="9" fill="#7d5a00">Stage 1</text>
+  <text x="390" y="172" text-anchor="middle" font-size="8" fill="#999">Cycle N</text>
+
+  <!-- Arrow to BRAM -->
+  <line x1="420" y1="150" x2="455" y2="150" stroke="#2d4a8a" stroke-width="1.5" marker-end="url(#arr_blue)"/>
+  <text x="437" y="143" text-anchor="middle" font-size="8" fill="#555">reg addr</text>
+
+  <!-- ===== BRAM ROM Lookup ===== -->
+  <rect x="455" y="105" width="110" height="90" rx="6" fill="#e2efda" stroke="#5a9e52" stroke-width="2"/>
+  <text x="510" y="125" text-anchor="middle" font-size="11" font-weight="bold" fill="#1a3a17">BRAM ROM</text>
+  <text x="510" y="139" text-anchor="middle" font-size="9" fill="#1a3a17">Lookup</text>
+  <text x="510" y="155" text-anchor="middle" font-size="9" fill="#555">10× sprite ROMs</text>
+  <text x="510" y="168" text-anchor="middle" font-size="9" fill="#555">font_rom</text>
+  <text x="510" y="181" text-anchor="middle" font-size="8" fill="#999">1-cycle latency</text>
+
+  <!-- Arrow to Palette -->
+  <line x1="565" y1="150" x2="600" y2="150" stroke="#2d4a8a" stroke-width="1.5" marker-end="url(#arr_blue)"/>
+  <text x="582" y="143" text-anchor="middle" font-size="8" fill="#555">index</text>
+
+  <!-- ===== Palette Decode ===== -->
+  <rect x="600" y="120" width="95" height="60" rx="5" fill="#dce6f7" stroke="#2d4a8a" stroke-width="1.5"/>
+  <text x="647" y="140" text-anchor="middle" font-size="10" font-weight="bold" fill="#1a2a5e">Palette</text>
+  <text x="647" y="154" text-anchor="middle" font-size="10" font-weight="bold" fill="#1a2a5e">Decode</text>
+  <text x="647" y="168" text-anchor="middle" font-size="9" fill="#555">index→RGB24</text>
+
+  <!-- Arrow to Reg2 -->
+  <line x1="695" y1="150" x2="728" y2="150" stroke="#2d4a8a" stroke-width="1.5" marker-end="url(#arr_blue)"/>
+  <text x="711" y="143" text-anchor="middle" font-size="8" fill="#555">RGB</text>
+
+  <!-- ===== Register Stage 2 ===== -->
+  <rect x="728" y="125" width="60" height="50" rx="5" fill="#fff2cc" stroke="#d6a800" stroke-width="2"/>
+  <text x="758" y="146" text-anchor="middle" font-size="10" font-weight="bold" fill="#7d5a00">Reg</text>
+  <text x="758" y="160" text-anchor="middle" font-size="9" fill="#7d5a00">Stage 2</text>
+  <text x="758" y="172" text-anchor="middle" font-size="8" fill="#999">Cycle N+1</text>
+
+  <!-- Arrow to MUX -->
+  <line x1="788" y1="150" x2="820" y2="150" stroke="#2d4a8a" stroke-width="1.5" marker-end="url(#arr_blue)"/>
+
+  <!-- ===== Priority MUX ===== -->
+  <rect x="820" y="125" width="65" height="50" rx="5" fill="#fce4ec" stroke="#c62828" stroke-width="2"/>
+  <text x="852" y="146" text-anchor="middle" font-size="10" font-weight="bold" fill="#c62828">Priority</text>
+  <text x="852" y="160" text-anchor="middle" font-size="10" font-weight="bold" fill="#c62828">MUX</text>
+  <text x="852" y="172" text-anchor="middle" font-size="8" fill="#555">9→1</text>
+
+  <!-- ===== Output ===== -->
+  <line x1="852" y1="175" x2="852" y2="210" stroke="#c62828" stroke-width="2" marker-end="url(#arr)"/>
+  <rect x="800" y="210" width="104" height="40" rx="5" fill="#fce4ec" stroke="#c62828" stroke-width="1.5"/>
+  <text x="852" y="228" text-anchor="middle" font-size="11" font-weight="bold" fill="#c62828">R[7:0]</text>
+  <text x="852" y="242" text-anchor="middle" font-size="11" font-weight="bold" fill="#c62828">G[7:0]  B[7:0]</text>
+
+  <!-- to hdmi_tx_0 -->
+  <line x1="852" y1="250" x2="852" y2="280" stroke="#c62828" stroke-width="1.5" marker-end="url(#arr)"/>
+  <text x="852" y="296" text-anchor="middle" font-size="10" fill="#c62828">hdmi_tx_0</text>
+
+  <!-- ===== Cycle annotations ===== -->
+  <rect x="10" y="300" width="870" height="110" rx="6" fill="#f8f8f8" stroke="#ccc" stroke-width="1"/>
+  <text x="20" y="318" font-size="11" font-weight="bold" fill="#333">Pipeline Timing (25 MHz, T=40 ns per cycle):</text>
+  <text x="20" y="336" font-size="10" fill="#333">Cycle N:   DrawX/Y → combinational layer address computation (all 9 layers in parallel)</text>
+  <text x="20" y="352" font-size="10" fill="#333">Cycle N:   Addresses registered (Reg Stage 1) → BRAM ROM outputs available next cycle</text>
+  <text x="20" y="368" font-size="10" fill="#333">Cycle N+1: BRAM data → Palette decode → registered (Reg Stage 2) → Priority MUX → RGB output</text>
+  <text x="20" y="384" font-size="10" fill="#333">Total:  2-cycle pipeline latency (pixel-synchronized with vga_controller hsync/vsync)</text>
+  <text x="20" y="400" font-size="10" fill="#555">Note: Wave sprite and Star sprite are combinationally computed (no ROM) — direct output to priority MUX</text>
+</svg>

@@ -1,0 +1,186 @@
+<svg viewBox="0 0 900 580" xmlns="http://www.w3.org/2000/svg" font-family="Arial, sans-serif" font-size="12">
+  <!-- Title -->
+  <text x="450" y="28" text-anchor="middle" font-size="15" font-weight="bold" fill="#1a1a2e">Figure 1: Top-Level Block Diagram — mb_usb_hdmi_top.sv</text>
+
+  <!-- ========== INPUTS (left) ========== -->
+  <!-- Clk -->
+  <rect x="10" y="80" width="80" height="30" rx="4" fill="#e8f4f8" stroke="#5b9bd5" stroke-width="1.5"/>
+  <text x="50" y="100" text-anchor="middle" font-size="11" fill="#1a1a2e">Clk (100 MHz)</text>
+
+  <!-- USB (MAX3421E) -->
+  <rect x="10" y="130" width="80" height="30" rx="4" fill="#e8f4f8" stroke="#5b9bd5" stroke-width="1.5"/>
+  <text x="50" y="145" text-anchor="middle" font-size="11" fill="#1a1a2e">USB HID</text>
+  <text x="50" y="157" text-anchor="middle" font-size="10" fill="#555">(MAX3421E)</text>
+
+  <!-- SW -->
+  <rect x="10" y="180" width="80" height="30" rx="4" fill="#e8f4f8" stroke="#5b9bd5" stroke-width="1.5"/>
+  <text x="50" y="200" text-anchor="middle" font-size="11" fill="#1a1a2e">SW[15:0]</text>
+
+  <!-- ========== clk_wiz_0 ========== -->
+  <rect x="130" y="68" width="110" height="55" rx="6" fill="#fff2cc" stroke="#d6a800" stroke-width="2"/>
+  <text x="185" y="88" text-anchor="middle" font-size="12" font-weight="bold" fill="#7d5a00">clk_wiz_0</text>
+  <text x="185" y="104" text-anchor="middle" font-size="10" fill="#7d5a00">25 MHz pixel clk</text>
+  <text x="185" y="116" text-anchor="middle" font-size="10" fill="#7d5a00">125 MHz SERDES clk</text>
+  <!-- arrow in -->
+  <line x1="90" y1="95" x2="130" y2="95" stroke="#5b9bd5" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- ========== mb_block_wrapper ========== -->
+  <rect x="130" y="150" width="260" height="200" rx="8" fill="#e2efda" stroke="#5a9e52" stroke-width="2.5"/>
+  <text x="260" y="172" text-anchor="middle" font-size="13" font-weight="bold" fill="#2d6a27">mb_block_wrapper</text>
+  <text x="260" y="188" text-anchor="middle" font-size="10" fill="#2d6a27">(Vivado Block Design)</text>
+
+  <!-- Internal components inside wrapper -->
+  <rect x="145" y="198" width="90" height="26" rx="4" fill="#c6e0b4" stroke="#5a9e52" stroke-width="1"/>
+  <text x="190" y="215" text-anchor="middle" font-size="10" fill="#1a3a17">MicroBlaze @ 100 MHz</text>
+
+  <rect x="245" y="198" width="80" height="26" rx="4" fill="#c6e0b4" stroke="#5a9e52" stroke-width="1"/>
+  <text x="285" y="211" text-anchor="middle" font-size="10" fill="#1a3a17">AXI4-Lite</text>
+  <text x="285" y="221" text-anchor="middle" font-size="10" fill="#1a3a17">Interconnect</text>
+
+  <rect x="145" y="235" width="80" height="26" rx="4" fill="#c6e0b4" stroke="#5a9e52" stroke-width="1"/>
+  <text x="185" y="252" text-anchor="middle" font-size="10" fill="#1a3a17">DDS Oscillator</text>
+  <text x="185" y="262" text-anchor="middle" font-size="10" fill="#1a3a17">(7 AXI regs)</text>
+
+  <rect x="245" y="235" width="80" height="26" rx="4" fill="#c6e0b4" stroke="#5a9e52" stroke-width="1"/>
+  <text x="285" y="252" text-anchor="middle" font-size="10" fill="#1a3a17">6× AXI GPIO</text>
+  <text x="285" y="262" text-anchor="middle" font-size="10" fill="#1a3a17">Instances</text>
+
+  <rect x="145" y="272" width="80" height="26" rx="4" fill="#c6e0b4" stroke="#5a9e52" stroke-width="1"/>
+  <text x="185" y="289" text-anchor="middle" font-size="10" fill="#1a3a17">dds_mixer</text>
+  <text x="185" y="299" text-anchor="middle" font-size="10" fill="#1a3a17">(4-ch poly)</text>
+
+  <rect x="245" y="272" width="80" height="26" rx="4" fill="#c6e0b4" stroke="#5a9e52" stroke-width="1"/>
+  <text x="285" y="289" text-anchor="middle" font-size="10" fill="#1a3a17">audio_pdm</text>
+  <text x="285" y="299" text-anchor="middle" font-size="10" fill="#1a3a17">(Δ-Σ PDM)</text>
+
+  <rect x="145" y="308" width="180" height="26" rx="4" fill="#c6e0b4" stroke="#5a9e52" stroke-width="1"/>
+  <text x="235" y="325" text-anchor="middle" font-size="10" fill="#1a3a17">USB SPI Controller (MAX3421E)</text>
+
+  <!-- USB input arrow -->
+  <line x1="90" y1="145" x2="130" y2="245" stroke="#5b9bd5" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <!-- SW input arrow -->
+  <line x1="90" y1="195" x2="130" y2="310" stroke="#5b9bd5" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- ========== GPIO output signals (right of wrapper) ========== -->
+  <!-- Signal labels -->
+  <text x="400" y="210" font-size="10" fill="#2d4a8a">keymask[31:0]</text>
+  <text x="400" y="225" font-size="10" fill="#2d4a8a">auto_keymask[31:0]</text>
+  <text x="400" y="240" font-size="10" fill="#2d4a8a">octave_idx[3:0]</text>
+  <text x="400" y="255" font-size="10" fill="#2d4a8a">wave_idx[2:0]</text>
+  <text x="400" y="270" font-size="10" fill="#2d4a8a">tile_word_lo[31:0]</text>
+  <text x="400" y="285" font-size="10" fill="#2d4a8a">tile_word_hi[31:0]</text>
+  <line x1="390" y1="210" x2="540" y2="210" stroke="#2d4a8a" stroke-width="1" stroke-dasharray="4,2"/>
+  <line x1="390" y1="225" x2="540" y2="225" stroke="#2d4a8a" stroke-width="1" stroke-dasharray="4,2"/>
+  <line x1="390" y1="240" x2="540" y2="240" stroke="#2d4a8a" stroke-width="1" stroke-dasharray="4,2"/>
+  <line x1="390" y1="255" x2="540" y2="255" stroke="#2d4a8a" stroke-width="1" stroke-dasharray="4,2"/>
+  <line x1="390" y1="270" x2="540" y2="270" stroke="#2d4a8a" stroke-width="1" stroke-dasharray="4,2"/>
+  <line x1="390" y1="285" x2="540" y2="285" stroke="#2d4a8a" stroke-width="1" stroke-dasharray="4,2"/>
+
+  <!-- audio_pdm_out arrow down to output -->
+  <text x="270" y="376" text-anchor="middle" font-size="10" fill="#2d4a8a">audio_pdm_out / audio_pdm_r</text>
+  <line x1="270" y1="350" x2="270" y2="420" stroke="#2d4a8a" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <rect x="200" y="420" width="140" height="28" rx="4" fill="#fce4ec" stroke="#c62828" stroke-width="1.5"/>
+  <text x="270" y="438" text-anchor="middle" font-size="11" fill="#c62828">3.5 mm Audio Jack</text>
+
+  <!-- ========== vga_controller ========== -->
+  <rect x="540" y="68" width="130" height="60" rx="6" fill="#fff2cc" stroke="#d6a800" stroke-width="2"/>
+  <text x="605" y="88" text-anchor="middle" font-size="12" font-weight="bold" fill="#7d5a00">vga_controller</text>
+  <text x="605" y="104" text-anchor="middle" font-size="10" fill="#7d5a00">drawX[9:0], drawY[9:0]</text>
+  <text x="605" y="116" text-anchor="middle" font-size="10" fill="#7d5a00">hsync, vsync, vde</text>
+  <!-- 25 MHz clock from clk_wiz -->
+  <line x1="240" y1="82" x2="540" y2="82" stroke="#d6a800" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#arrow_gold)"/>
+  <text x="390" y="76" text-anchor="middle" font-size="9" fill="#7d5a00">clk_25MHz</text>
+
+  <!-- ========== piano_display2 ========== -->
+  <rect x="540" y="155" width="200" height="195" rx="8" fill="#dce6f7" stroke="#2d4a8a" stroke-width="2.5"/>
+  <text x="640" y="178" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a2a5e">piano_display2</text>
+  <text x="640" y="193" text-anchor="middle" font-size="10" fill="#1a2a5e">(per-pixel rendering)</text>
+
+  <!-- Sub-modules inside piano_display2 -->
+  <rect x="552" y="202" width="84" height="22" rx="3" fill="#b8cce4" stroke="#2d4a8a" stroke-width="1"/>
+  <text x="594" y="217" text-anchor="middle" font-size="9" fill="#1a2a5e">10× BRAM ROM</text>
+
+  <rect x="644" y="202" width="84" height="22" rx="3" fill="#b8cce4" stroke="#2d4a8a" stroke-width="1"/>
+  <text x="686" y="217" text-anchor="middle" font-size="9" fill="#1a2a5e">10× Palette Dec</text>
+
+  <rect x="552" y="232" width="84" height="22" rx="3" fill="#b8cce4" stroke="#2d4a8a" stroke-width="1"/>
+  <text x="594" y="247" text-anchor="middle" font-size="9" fill="#1a2a5e">font_rom</text>
+
+  <rect x="644" y="232" width="84" height="22" rx="3" fill="#b8cce4" stroke="#2d4a8a" stroke-width="1"/>
+  <text x="686" y="247" text-anchor="middle" font-size="9" fill="#1a2a5e">Star Anim FSM</text>
+
+  <rect x="552" y="262" width="84" height="22" rx="3" fill="#b8cce4" stroke="#2d4a8a" stroke-width="1"/>
+  <text x="594" y="277" text-anchor="middle" font-size="9" fill="#1a2a5e">Wave Sprite</text>
+
+  <rect x="644" y="262" width="84" height="22" rx="3" fill="#b8cce4" stroke="#2d4a8a" stroke-width="1"/>
+  <text x="686" y="277" text-anchor="middle" font-size="9" fill="#1a2a5e">Priority MUX</text>
+
+  <rect x="552" y="292" width="176" height="22" rx="3" fill="#b8cce4" stroke="#2d4a8a" stroke-width="1"/>
+  <text x="640" y="307" text-anchor="middle" font-size="9" fill="#1a2a5e">9-layer combinational renderer</text>
+
+  <!-- Output label -->
+  <text x="640" y="332" text-anchor="middle" font-size="10" fill="#1a2a5e">→ R[7:0], G[7:0], B[7:0]</text>
+
+  <!-- drawX/Y arrows from vga_controller down to piano_display2 -->
+  <line x1="605" y1="128" x2="605" y2="155" stroke="#d6a800" stroke-width="1.5" marker-end="url(#arrow_gold)"/>
+  <text x="620" y="144" font-size="9" fill="#7d5a00">drawX/Y</text>
+
+  <!-- GPIO signals arrow to piano_display2 -->
+  <line x1="540" y1="250" x2="540" y2="250" stroke="#2d4a8a" stroke-width="1"/>
+
+  <!-- ========== hdmi_tx_0 ========== -->
+  <rect x="540" y="380" width="200" height="60" rx="6" fill="#fff2cc" stroke="#d6a800" stroke-width="2"/>
+  <text x="640" y="402" text-anchor="middle" font-size="12" font-weight="bold" fill="#7d5a00">hdmi_tx_0</text>
+  <text x="640" y="418" text-anchor="middle" font-size="10" fill="#7d5a00">TMDS 8b/10b + SERDES</text>
+  <text x="640" y="430" text-anchor="middle" font-size="10" fill="#7d5a00">250 Mbps/lane</text>
+
+  <!-- RGB arrow from piano_display2 to hdmi_tx_0 -->
+  <line x1="640" y1="350" x2="640" y2="380" stroke="#2d4a8a" stroke-width="2" marker-end="url(#arrow_blue)"/>
+  <text x="660" y="368" font-size="9" fill="#1a2a5e">RGB 24-bit</text>
+
+  <!-- 125 MHz to hdmi_tx -->
+  <line x1="240" y1="95" x2="520" y2="400" stroke="#d6a800" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#arrow_gold)"/>
+  <text x="380" y="320" font-size="9" fill="#7d5a00" transform="rotate(-25 380 320)">clk_125MHz (SERDES)</text>
+
+  <!-- HDMI output -->
+  <rect x="760" y="390" width="110" height="40" rx="4" fill="#fce4ec" stroke="#c62828" stroke-width="1.5"/>
+  <text x="815" y="408" text-anchor="middle" font-size="11" fill="#c62828">HDMI Output</text>
+  <text x="815" y="422" text-anchor="middle" font-size="9" fill="#c62828">TMDS diff pairs</text>
+  <line x1="740" y1="410" x2="760" y2="410" stroke="#c62828" stroke-width="2" marker-end="url(#arrow_red)"/>
+
+  <!-- sync signals from vga to hdmi -->
+  <text x="550" y="375" font-size="9" fill="#7d5a00">hsync/vsync/vde</text>
+
+  <!-- ========= Legend ========= -->
+  <rect x="10" y="490" width="870" height="80" rx="6" fill="#f8f8f8" stroke="#ccc" stroke-width="1"/>
+  <text x="20" y="508" font-size="11" font-weight="bold" fill="#333">Legend:</text>
+  <rect x="20" y="515" width="14" height="14" fill="#e2efda" stroke="#5a9e52" stroke-width="1.5"/>
+  <text x="38" y="526" font-size="10" fill="#333">Vivado Block Design (sw-driven, 100 MHz AXI)</text>
+  <rect x="220" y="515" width="14" height="14" fill="#fff2cc" stroke="#d6a800" stroke-width="1.5"/>
+  <text x="238" y="526" font-size="10" fill="#333">Clock / Sync IP</text>
+  <rect x="340" y="515" width="14" height="14" fill="#dce6f7" stroke="#2d4a8a" stroke-width="1.5"/>
+  <text x="358" y="526" font-size="10" fill="#333">SV Display Logic (25 MHz, combinational)</text>
+  <rect x="560" y="515" width="14" height="14" fill="#fce4ec" stroke="#c62828" stroke-width="1.5"/>
+  <text x="578" y="526" font-size="10" fill="#333">Physical I/O</text>
+
+  <line x1="20" y1="545" x2="50" y2="545" stroke="#2d4a8a" stroke-width="1.5" stroke-dasharray="4,2"/>
+  <text x="55" y="549" font-size="10" fill="#333">AXI GPIO signals (keymask, octave, wave, tile)</text>
+  <line x1="320" y1="545" x2="350" y2="545" stroke="#d6a800" stroke-width="1.5" stroke-dasharray="4,2"/>
+  <text x="355" y="549" font-size="10" fill="#333">Clock distribution</text>
+
+  <!-- Arrowhead markers -->
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#5b9bd5"/>
+    </marker>
+    <marker id="arrow_gold" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#d6a800"/>
+    </marker>
+    <marker id="arrow_blue" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#2d4a8a"/>
+    </marker>
+    <marker id="arrow_red" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#c62828"/>
+    </marker>
+  </defs>
+</svg>
